@@ -3,5 +3,129 @@
     "dashboardTitle": "Welcome to WorkTrack",
     "@dashboardTitle": {
         "description": "Title of the dashboard screen"
+    },
+    "accumulatedLabel": "Accumulated",
+    "@accumulatedLabel": {
+        "description": "Label for the accumulated hours"
+    },
+    "remainingLabel": "Remaining",
+    "@remainingLabel": {
+        "description": "Label for the remaining hours"
+    },
+    "estimatedLabel": "Estimated",
+    "@estimatedLabel": {
+        "description": "Label for the estimated hours"
+    },
+    "targetLabel": "Target",
+    "@targetLabel": {
+        "description": "Label for the target hours"
+    },
+    "todayLabel": "Today",
+    "@todayLabel": {
+        "description": "Label for the today button"
+    },
+    "selectADayLabel": "Select a day to log hours",
+    "@selectADayLabel": {
+        "description": "Label for the select a day"
+    },
+    "monShort": "Mon",
+    "@monShort": {
+        "description": "Short for Monday"
+    },
+    "tueShort": "Tue",
+    "@tueShort": {
+        "description": "Short for Tuesday"
+    },
+    "wedShort": "Wed",
+    "@wedShort": {
+        "description": "Short for Wednesday"
+    },
+    "thuShort": "Thu",
+    "@thuShort": {
+        "description": "Short for Thursday"
+    },
+    "friShort": "Fri",
+    "@friShort": {
+        "description": "Short for Friday"
+    },
+    "satShort": "Sat",
+    "@satShort": {
+        "description": "Short for Saturday"
+    },
+    "sunShort": "Sun",
+    "@sunShort": {
+        "description": "Short for Sunday"
+    },
+    "hoursWorkedLabel": "Hours Worked",
+    "@hoursWorkedLabel": {
+        "description": "Number of hours worked on the selected day"
+    },
+    "hoursAbbreviation": "h",
+    "@hoursAbbreviation": {
+        "description": "The abbreviation for hours"
+    },
+    "hoursHintText": "0 = missed / holiday",
+    "@hoursHintText": {
+        "description": "Hint text for hours"
+    },
+    "hoursValidationMessage": "Enter a value between 0 and 24",
+    "@hoursValidationMessage": {
+        "description": "Validation message for hours"
+    },
+    "extraDayLabel": "Extra Day",
+    "@extraDayLabel": {
+        "description": "Label for extra day"
+    },
+    "extraDayHint": "Weekend or overtime",
+    "@extraDayHint": {
+        "description": "Hint text for extra day"
+    },
+    "notesLabel": "Notes",
+    "@notesLabel": {
+        "description": "Label for notes"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Save button"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel button"
+    },
+    "clear": "Clear",
+    "@clear": {
+        "description": "Clear button"
+    },
+    "settingsDialogTitle": "Settings",
+    "@settingsDialogTitle": {
+        "description": "Title of the settings dialog"
+    },
+    "hourlyRateLabel": "Hourly Rate",
+    "@hourlyRateLabel": {
+        "description": "Label for the hourly rate"
+    },
+    "hourlyRateValidationMessage": "Enter a rate greater than 0",
+    "@hourlyRateValidationMessage": {
+        "description": "Validation message for the hourly rate"
+    },
+    "workingDaysLabel": "Working Days",
+    "@workingDaysLabel": {
+        "description": "Label for the working days"
+    },
+    "standardHoursLabel": "Standard Hours per Day",
+    "@standardHoursLabel": {
+        "description": "Label for the standard hours per day"
+    },
+    "currencySymbolLabel": "Currency Symbol",
+    "@currencySymbolLabel": {
+        "description": "Label for the currency symbol"
+    },
+    "currencySymbolValidationMessage": "Enter a currency symbol",
+    "@currencySymbolValidationMessage": {
+        "description": "Validation message for the currency symbol"
+    },
+    "fontFamilyLabel": "Font Family",
+    "@fontFamilyLabel": {
+        "description": "Label for the font family"
     }
 }

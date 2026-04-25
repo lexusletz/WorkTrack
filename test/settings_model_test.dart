@@ -1,18 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:work_track/core/settings/settings_model.dart';
+import 'package:work_track/core/theme/typography.dart';
 
 void main() {
   group('Settings', () {
     test('round-trips through JSON', () {
       const original = Settings(
         hourlyRate: 37.5,
-        workingDays: {
-          DateTime.monday,
-          DateTime.wednesday,
-          DateTime.friday,
-        },
+        workingDays: {DateTime.monday, DateTime.wednesday, DateTime.friday},
         standardHoursPerDay: 7.5,
         currencySymbol: '€',
+        fontFamily: FontFamilyOptions.merriweather,
       );
 
       final roundTripped = Settings.fromJsonString(original.toJsonString());
@@ -20,8 +18,9 @@ void main() {
     });
 
     test('defaults round-trip through JSON', () {
-      final roundTripped =
-          Settings.fromJsonString(Settings.defaults.toJsonString());
+      final roundTripped = Settings.fromJsonString(
+        Settings.defaults.toJsonString(),
+      );
       expect(roundTripped, equals(Settings.defaults));
     });
 

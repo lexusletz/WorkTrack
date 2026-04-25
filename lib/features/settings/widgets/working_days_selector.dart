@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class WorkingDaysSelector extends StatelessWidget {
   const WorkingDaysSelector({
     super.key,
@@ -10,27 +12,31 @@ class WorkingDaysSelector extends StatelessWidget {
   final Set<int> selected;
   final ValueChanged<Set<int>> onChanged;
 
-  static const _labels = {
-    DateTime.monday: 'Mon',
-    DateTime.tuesday: 'Tue',
-    DateTime.wednesday: 'Wed',
-    DateTime.thursday: 'Thu',
-    DateTime.friday: 'Fri',
-    DateTime.saturday: 'Sat',
-    DateTime.sunday: 'Sun',
-  };
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final labels = {
+      DateTime.monday: l10n.monShort,
+      DateTime.tuesday: l10n.tueShort,
+      DateTime.wednesday: l10n.wedShort,
+      DateTime.thursday: l10n.thuShort,
+      DateTime.friday: l10n.friShort,
+      DateTime.saturday: l10n.satShort,
+      DateTime.sunday: l10n.sunShort,
+    };
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Working Days', style: Theme.of(context).textTheme.bodySmall),
+        Text(
+          AppLocalizations.of(context)!.workingDaysLabel,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: _labels.entries.map((e) {
+          children: labels.entries.map((e) {
             final isSelected = selected.contains(e.key);
             return FilterChip(
               label: Text(e.value),

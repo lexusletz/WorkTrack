@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class HourlyRateField extends StatelessWidget {
   const HourlyRateField({
     super.key,
@@ -18,7 +20,7 @@ class HourlyRateField extends StatelessWidget {
     return TextFormField(
       initialValue: value > 0 ? value.toString() : '',
       decoration: InputDecoration(
-        labelText: 'Hourly Rate',
+        labelText: AppLocalizations.of(context)!.hourlyRateLabel,
         prefixText: '$currencySymbol ',
         border: const OutlineInputBorder(),
       ),
@@ -28,7 +30,9 @@ class HourlyRateField extends StatelessWidget {
       ],
       validator: (v) {
         final n = double.tryParse(v ?? '');
-        if (n == null || n <= 0) return 'Enter a rate greater than 0';
+        if (n == null || n <= 0) {
+          return AppLocalizations.of(context)!.hourlyRateValidationMessage;
+        }
         return null;
       },
       onChanged: (v) {

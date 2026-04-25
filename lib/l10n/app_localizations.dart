@@ -103,6 +103,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to WorkTrack'**
   String get dashboardTitle;
+
+  /// Label for the accumulated hours
+  ///
+  /// In en, this message translates to:
+  /// **'Accumulated'**
+  String get accumulatedLabel;
+
+  /// Label for the remaining hours
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remainingLabel;
+
+  /// Label for the estimated hours
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated'**
+  String get estimatedLabel;
+
+  /// Label for the target hours
+  ///
+  /// In en, this message translates to:
+  /// **'Target'**
+  String get targetLabel;
+
+  /// Label for the today button
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get todayLabel;
+
+  /// Label for the select a day
+  ///
+  /// In en, this message translates to:
+  /// **'Select a day to log hours'**
+  String get selectADayLabel;
+
+  /// Short for Monday
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get monShort;
+
+  /// Short for Tuesday
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get tueShort;
+
+  /// Short for Wednesday
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get wedShort;
+
+  /// Short for Thursday
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get thuShort;
+
+  /// Short for Friday
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get friShort;
+
+  /// Short for Saturday
+  ///
+  /// In en, this message translates to:
+  /// **'Sat'**
+  String get satShort;
+
+  /// Short for Sunday
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get sunShort;
+
+  /// Number of hours worked on the selected day
+  ///
+  /// In en, this message translates to:
+  /// **'Hours Worked'**
+  String get hoursWorkedLabel;
+
+  /// The abbreviation for hours
+  ///
+  /// In en, this message translates to:
+  /// **'h'**
+  String get hoursAbbreviation;
+
+  /// Hint text for hours
+  ///
+  /// In en, this message translates to:
+  /// **'0 = missed / holiday'**
+  String get hoursHintText;
+
+  /// Validation message for hours
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a value between 0 and 24'**
+  String get hoursValidationMessage;
+
+  /// Label for extra day
+  ///
+  /// In en, this message translates to:
+  /// **'Extra Day'**
+  String get extraDayLabel;
+
+  /// Hint text for extra day
+  ///
+  /// In en, this message translates to:
+  /// **'Weekend or overtime'**
+  String get extraDayHint;
+
+  /// Label for notes
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notesLabel;
+
+  /// Save button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Clear button
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// Title of the settings dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsDialogTitle;
+
+  /// Label for the hourly rate
+  ///
+  /// In en, this message translates to:
+  /// **'Hourly Rate'**
+  String get hourlyRateLabel;
+
+  /// Validation message for the hourly rate
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a rate greater than 0'**
+  String get hourlyRateValidationMessage;
+
+  /// Label for the working days
+  ///
+  /// In en, this message translates to:
+  /// **'Working Days'**
+  String get workingDaysLabel;
+
+  /// Label for the standard hours per day
+  ///
+  /// In en, this message translates to:
+  /// **'Standard Hours per Day'**
+  String get standardHoursLabel;
+
+  /// Label for the currency symbol
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Symbol'**
+  String get currencySymbolLabel;
+
+  /// Validation message for the currency symbol
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a currency symbol'**
+  String get currencySymbolValidationMessage;
+
+  /// Label for the font family
+  ///
+  /// In en, this message translates to:
+  /// **'Font Family'**
+  String get fontFamilyLabel;
 }
 
 class _AppLocalizationsDelegate

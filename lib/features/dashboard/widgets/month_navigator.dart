@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:work_track/core/extensions/string_extension.dart';
 import '../../../core/forecast/forecast_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../state/dashboard_providers.dart';
 
 class MonthNavigator extends ConsumerWidget {
@@ -30,7 +32,9 @@ class MonthNavigator extends ConsumerWidget {
           ),
           Expanded(
             child: Text(
-              DateFormat.yMMMM().format(browsedMonth),
+              DateFormat.yMMMM(
+                AppLocalizations.of(context)!.localeName,
+              ).format(browsedMonth).capitalize(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
             ),
@@ -51,11 +55,15 @@ class MonthNavigator extends ConsumerWidget {
             onPressed: isCurrentMonth
                 ? null
                 : () {
-                    ref.read(browsedMonthProvider.notifier).state = currentMonth;
-                    ref.read(selectedDayProvider.notifier).state =
-                        DateTime(now.year, now.month, now.day);
+                    ref.read(browsedMonthProvider.notifier).state =
+                        currentMonth;
+                    ref.read(selectedDayProvider.notifier).state = DateTime(
+                      now.year,
+                      now.month,
+                      now.day,
+                    );
                   },
-            child: const Text('Today'),
+            child: Text(AppLocalizations.of(context)!.todayLabel),
           ),
         ],
       ),

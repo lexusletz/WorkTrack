@@ -3,5 +3,129 @@
     "dashboardTitle": "Bienvenido a WorkTrack",
     "@dashboardTitle": {
         "description": "Titulo de la pantalla principal"
+    },
+    "accumulatedLabel": "Acumulado",
+    "@accumulatedLabel": {
+        "description": "Etiqueta de las horas acumuladas"
+    },
+    "remainingLabel": "Restante",
+    "@remainingLabel": {
+        "description": "Etiqueta de las horas restantes"
+    },
+    "estimatedLabel": "Estimado",
+    "@estimatedLabel": {
+        "description": "Etiqueta de las horas estimadas"
+    },
+    "targetLabel": "Objetivo",
+    "@targetLabel": {
+        "description": "Etiqueta de las horas objetivo"
+    },
+    "todayLabel": "Hoy",
+    "@todayLabel": {
+        "description": "Etiqueta para el botón Hoy"
+    },
+    "selectADayLabel": "Seleccionar un día para registrar horas",
+    "@selectADayLabel": {
+        "description": "Etiqueta para el botón de seleccionar un día"
+    },
+    "monShort": "Lun",
+    "@monShort": {
+        "description": "Short for Monday"
+    },
+    "tueShort": "Mar",
+    "@tueShort": {
+        "description": "Short for Tuesday"
+    },
+    "wedShort": "Mié",
+    "@wedShort": {
+        "description": "Short for Wednesday"
+    },
+    "thuShort": "Jue",
+    "@thuShort": {
+        "description": "Short for Thursday"
+    },
+    "friShort": "Vie",
+    "@friShort": {
+        "description": "Short for Friday"
+    },
+    "satShort": "Sáb",
+    "@satShort": {
+        "description": "Short for Saturday"
+    },
+    "sunShort": "Dom",
+    "@sunShort": {
+        "description": "Short for Sunday"
+    },
+    "hoursWorkedLabel": "Horas Trabajadas",
+    "@hoursWorkedLabel": {
+        "description": "Número de horas trabajadas en el día seleccionado"
+    },
+    "hoursAbbreviation": "h",
+    "@hoursAbbreviation": {
+        "description": "La abreviatura para horas"
+    },
+    "hoursHintText": "0 = Faltado / Vacaciones",
+    "@hoursHintText": {
+        "description": "El texto de ayuda para las horas"
+    },
+    "hoursValidationMessage": "Ingresa un valor entre 0 y 24",
+    "@hoursValidationMessage": {
+        "description": "El mensaje de validación para las horas"
+    },
+    "extraDayLabel": "Día extra",
+    "@extraDayLabel": {
+        "description": "Etiqueta para el botón de día extra"
+    },
+    "extraDayHint": "Fin de semana o tiempo extra",
+    "@extraDayHint": {
+        "description": "El texto de ayuda para día extra"
+    },
+    "notesLabel": "Notas",
+    "@notesLabel": {
+        "description": "Etiqueta para las notas"
+    },
+    "save": "Guardar",
+    "@save": {
+        "description": "Botón Guardar"
+    },
+    "clear": "Limpiar",
+    "@clear": {
+        "description": "Botón Limpiar"
+    },
+    "cancel": "Cancelar",
+    "@cancel": {
+        "description": "Botón Cancelar"
+    },
+    "settingsDialogTitle": "Configuración",
+    "@settingsDialogTitle": {
+        "description": "Titulo del diálogo de configuración"
+    },
+    "hourlyRateLabel": "Precio por hora",
+    "@hourlyRateLabel": {
+        "description": "Etiqueta del precio por hora"
+    },
+    "hourlyRateValidationMessage": "Ingresa un precio mayor a 0",
+    "@hourlyRateValidationMessage": {
+        "description": "Mensaje de validación para el precio por hora"
+    },
+    "workingDaysLabel": "Días a trabajar",
+    "@workingDaysLabel": {
+        "description": "Etiqueta de los días a trabajar"
+    },
+    "standardHoursLabel": "Número de horas por día",
+    "@standardHoursLabel": {
+        "description": "Etiqueta del número de horas por día"
+    },
+    "currencySymbolLabel": "Tipo de moneda",
+    "@currencySymbolLabel": {
+        "description": "Etiqueta del tipo de moneda"
+    },
+    "currencySymbolValidationMessage": "Ingresa un tipo de moneda",
+    "@currencySymbolValidationMessage": {
+        "description": "Mensaje de validación para el tipo de moneda"
+    },
+    "fontFamilyLabel": "Tipo de letra",
+    "@fontFamilyLabel": {
+        "description": "Etiqueta del tipo de letra"
     }
 }

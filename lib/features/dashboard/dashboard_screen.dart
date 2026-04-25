@@ -11,20 +11,22 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
             Image.asset('assets/icon/icon.png', width: 48, height: 48),
             const SizedBox(width: 10),
-            Text(AppLocalizations.of(context)!.dashboardTitle),
+            Text(l10n.dashboardTitle),
           ],
         ),
         centerTitle: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: 'Settings',
+            tooltip: l10n.settingsDialogTitle,
             onPressed: () => showDialog<void>(
               context: context,
               builder: (_) => const SettingsDialog(),

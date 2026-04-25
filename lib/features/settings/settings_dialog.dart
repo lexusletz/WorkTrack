@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:work_track/features/settings/widgets/font_family_selector.dart';
 import '../../core/settings/settings_model.dart';
 import '../../core/settings/settings_providers.dart';
+import '../../l10n/app_localizations.dart';
 import 'widgets/hourly_rate_field.dart';
 import 'widgets/working_days_selector.dart';
 import 'widgets/standard_hours_field.dart';
@@ -22,7 +23,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   @override
   void initState() {
     super.initState();
-    _draft = ref.read(settingsProvider).valueOrNull ?? Settings.defaults;
+    _draft = ref.read(settingsProvider).value ?? Settings.defaults;
   }
 
   Future<void> _save() async {
@@ -33,6 +34,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Dialog(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 480),
@@ -48,7 +51,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Settings',
+                        l10n.settingsDialogTitle,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -87,17 +90,23 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                     _draft = _draft.copyWith(currencySymbol: v);
                   }),
                 ),
-                const FontFamilySelector(),
+                const SizedBox(height: 2),
+                FontFamilySelector(
+                  onChanged: (v) => setState(() {
+                    _draft = _draft.copyWith(fontFamily: v);
+                  }),
+                  value: _draft.fontFamily,
+                ),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Cancel'),
+                      child: Text(l10n.cancel),
                     ),
                     const SizedBox(width: 8),
-                    FilledButton(onPressed: _save, child: const Text('Save')),
+                    FilledButton(onPressed: _save, child: Text(l10n.save)),
                   ],
                 ),
               ],

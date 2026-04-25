@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class CurrencySymbolField extends StatelessWidget {
   const CurrencySymbolField({
     super.key,
@@ -13,17 +15,21 @@ class CurrencySymbolField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return TextFormField(
       initialValue: value,
-      decoration: const InputDecoration(
-        labelText: 'Currency Symbol',
+      decoration: InputDecoration(
+        labelText: l10n.currencySymbolLabel,
         hintText: r'$',
         border: OutlineInputBorder(),
       ),
       maxLength: 3,
       inputFormatters: [LengthLimitingTextInputFormatter(3)],
       validator: (v) {
-        if (v == null || v.trim().isEmpty) return 'Enter a currency symbol';
+        if (v == null || v.trim().isEmpty) {
+          return l10n.currencySymbolValidationMessage;
+        }
         return null;
       },
       onChanged: (v) {

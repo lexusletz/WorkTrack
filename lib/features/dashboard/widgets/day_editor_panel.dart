@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:work_track/core/extensions/string_extension.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../state/dashboard_providers.dart';
 
 class DayEditorPanel extends ConsumerStatefulWidget {
@@ -62,17 +64,20 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
     final selectedDay = ref.watch(selectedDayProvider);
 
     if (selectedDay == null) {
-      return const Center(
+      return Center(
         child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Text('Select a day to log hours', textAlign: TextAlign.center),
+          padding: const EdgeInsets.all(24),
+          child: Text(
+            AppLocalizations.of(context)!.selectADayLabel,
+            textAlign: TextAlign.center,
+          ),
         ),
       );
     }
 
     final month = DateTime(selectedDay.year, selectedDay.month);
     final logsAsync = ref.watch(worklogsForMonthProvider(month));
-    final logs = logsAsync.valueOrNull ?? [];
+    final logs = logsAsync.value ?? [];
     final log = logs.cast<WorkLog?>().firstWhere(
       (l) => l?.key == WorkLog.keyFor(selectedDay),
       orElse: () => null,
@@ -101,7 +106,9 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                DateFormat.yMMMMEEEEd().format(selectedDay),
+                DateFormat.yMMMMEEEEd(
+                  AppLocalizations.of(context)!.localeName,
+                ).format(selectedDay).capitalize(),
                 style: theme.textTheme.titleSmall,
               ),
               const SizedBox(height: 20),
@@ -114,10 +121,10 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
                 child: TextFormField(
                   controller: _hoursController,
                   focusNode: _hoursFocusNode,
-                  decoration: const InputDecoration(
-                    labelText: 'Hours Worked',
-                    suffixText: 'h',
-                    hintText: '0 = missed / holiday',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.hoursWorkedLabel,
+                    suffixText: AppLocalizations.of(context)!.hoursAbbreviation,
+                    hintText: AppLocalizations.of(context)!.hoursHintText,
                     border: InputBorder.none,
                   ),
                   keyboardType: const TextInputType.numberWithOptions(
@@ -130,7 +137,9 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
                     if (v == null || v.isEmpty) return null; // empty = clear
                     final n = double.tryParse(v);
                     if (n == null || n < 0 || n > 24) {
-                      return 'Enter 0–24';
+                      return AppLocalizations.of(
+                        context,
+                      )!.hoursValidationMessage;
                     }
                     return null;
                   },
@@ -144,8 +153,8 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
               const SizedBox(height: 16),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Extra Day'),
-                subtitle: const Text('Weekend or overtime'),
+                title: Text(AppLocalizations.of(context)!.extraDayLabel),
+                subtitle: Text(AppLocalizations.of(context)!.extraDayHint),
                 value: _isExtraDay,
                 onChanged: (v) => setState(() => _isExtraDay = v),
               ),
@@ -158,8 +167,8 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 child: TextFormField(
                   controller: _notesController,
-                  decoration: const InputDecoration(
-                    labelText: 'Notes',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.notesLabel,
                     border: InputBorder.none,
                   ),
                   maxLines: 3,
@@ -171,14 +180,14 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
                   if (log != null)
                     OutlinedButton(
                       onPressed: () => _clear(selectedDay),
-                      child: const Text('Clear'),
+                      child: Text(AppLocalizations.of(context)!.clear),
                     ),
                   const Spacer(),
                   FilledButton(
                     onPressed: _hoursController.text.isEmpty && log == null
                         ? null
                         : () => _save(selectedDay),
-                    child: const Text('Save'),
+                    child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ],
               ),

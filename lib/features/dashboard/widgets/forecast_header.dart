@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:work_track/l10n/app_localizations.dart';
 import '../../../core/forecast/forecast_providers.dart';
 import '../../../core/settings/settings_providers.dart';
 import 'stat_card.dart';
@@ -12,7 +13,7 @@ class ForecastHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final forecastAsync = ref.watch(forecastProvider);
     final settingsAsync = ref.watch(settingsProvider);
-    final symbol = settingsAsync.valueOrNull?.currencySymbol ?? r'$';
+    final symbol = settingsAsync.value?.currencySymbol ?? r'$';
 
     String fmt(double v) =>
         NumberFormat.currency(symbol: symbol, decimalDigits: 2).format(v);
@@ -30,19 +31,34 @@ class ForecastHeader extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
         child: Row(
           children: [
-            Expanded(child: StatCard(label: 'Accumulated', value: fmt(f.accumulated))),
-            const SizedBox(width: 8),
-            Expanded(child: StatCard(label: 'Remaining', value: fmt(f.remaining))),
+            Expanded(
+              child: StatCard(
+                label: AppLocalizations.of(context)!.accumulatedLabel,
+                value: fmt(f.accumulated),
+              ),
+            ),
             const SizedBox(width: 8),
             Expanded(
               child: StatCard(
-                label: 'Estimate',
+                label: AppLocalizations.of(context)!.remainingLabel,
+                value: fmt(f.remaining),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: StatCard(
+                label: AppLocalizations.of(context)!.estimatedLabel,
                 value: fmt(f.estimate),
                 emphasized: true,
               ),
             ),
             const SizedBox(width: 8),
-            Expanded(child: StatCard(label: 'Target', value: fmt(f.target))),
+            Expanded(
+              child: StatCard(
+                label: AppLocalizations.of(context)!.targetLabel,
+                value: fmt(f.target),
+              ),
+            ),
           ],
         ),
       ),

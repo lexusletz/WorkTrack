@@ -4,21 +4,12 @@ import '../../../core/forecast/forecast_providers.dart';
 import '../../../core/settings/settings_providers.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../state/dashboard_providers.dart';
 import 'day_cell.dart';
 
 class CalendarGrid extends ConsumerWidget {
   const CalendarGrid({super.key});
-
-  static const _weekdayHeaders = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun',
-  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,9 +20,20 @@ class CalendarGrid extends ConsumerWidget {
     final now = ref.read(nowProvider);
     final today = DateTime(now.year, now.month, now.day);
 
-    final settings = settingsAsync.valueOrNull;
+    final l10n = AppLocalizations.of(context)!;
+    final weekdayHeaders = [
+      l10n.monShort,
+      l10n.tueShort,
+      l10n.wedShort,
+      l10n.thuShort,
+      l10n.friShort,
+      l10n.satShort,
+      l10n.sunShort,
+    ];
+
+    final settings = settingsAsync.value;
     final logMap = <String, WorkLog>{
-      for (final l in logsAsync.valueOrNull ?? []) l.key: l,
+      for (final l in logsAsync.value ?? []) l.key: l,
     };
 
     final daysInMonth = DateUtils.getDaysInMonth(
@@ -50,7 +52,7 @@ class CalendarGrid extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: Row(
-            children: _weekdayHeaders
+            children: weekdayHeaders
                 .map(
                   (h) => Expanded(
                     child: Center(
