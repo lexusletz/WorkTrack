@@ -1,0 +1,7 @@
+{
+    "@@locale": "es",
+    "dashboardTitle": "Bienvenido a WorkTrack",
+    "@dashboardTitle": {
+        "description": "Titulo de la pantalla principal"
+    }
+}

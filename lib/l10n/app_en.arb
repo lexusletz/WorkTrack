@@ -1,0 +1,7 @@
+{
+    "@@locale": "en",
+    "dashboardTitle": "Welcome to WorkTrack",
+    "@dashboardTitle": {
+        "description": "Title of the dashboard screen"
+    }
+}
