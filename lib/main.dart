@@ -19,6 +19,9 @@ void main() async {
   Hive.registerAdapter(WorkLogAdapter());
   final worklogBox = await Hive.openBox<WorkLog>('worklogs');
 
+  // TODO: If the device is a phone, force portrait orientation
+  // else force landscape orientation
+
   // Force landscape mode
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
