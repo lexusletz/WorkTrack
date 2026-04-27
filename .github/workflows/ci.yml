@@ -67,7 +67,7 @@ jobs:
           git config user.email 'action@github.com'
           git add .
           git commit -m "Update version.json for new release" || exit 0
-          git push
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
