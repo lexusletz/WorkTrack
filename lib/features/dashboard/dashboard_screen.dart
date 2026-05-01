@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:work_track/l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/updater/updater_providers.dart';
+import '../../l10n/app_localizations.dart';
 import '../settings/settings_dialog.dart';
 import 'widgets/forecast_header.dart';
 import 'widgets/month_navigator.dart';
 import 'widgets/calendar_grid.dart';
 import 'widgets/day_editor_panel.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(updaterProvider.notifier).checkForUpdates();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+    ref.listen(updaterProvider, (previous, next) async {
+      if (next.hasNewVersion) {
+        await showDialog<void>(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text("Actualizacion Disponible"),
+            content: Text(
+              "La version ${next.newVersion} esta disponible. Deseas actualizar ahora?",
+            ),
+          ),
+        );
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(

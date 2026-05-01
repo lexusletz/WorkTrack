@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:work_track/core/theme/typography.dart';
+import '../theme/typography.dart';
 
 @immutable
 class Settings {

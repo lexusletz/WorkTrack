@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:work_track/core/extensions/string_extension.dart';
-import 'package:work_track/core/theme/typography.dart';
+import '../../../core/extensions/string_extension.dart';
+import '../../../core/theme/typography.dart';
 
 import '../../../l10n/app_localizations.dart';
 

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:work_track/core/theme/app_theme.dart';
-import 'package:work_track/l10n/app_localizations.dart';
+import 'core/theme/app_theme.dart';
+import 'core/updater/updater_providers.dart';
+import 'l10n/app_localizations.dart';
 import 'core/settings/settings_providers.dart';
 import 'core/worklog/worklog_model.dart';
 import 'core/worklog/worklog_providers.dart';
@@ -19,10 +21,13 @@ void main() async {
   Hive.registerAdapter(WorkLogAdapter());
   final worklogBox = await Hive.openBox<WorkLog>('worklogs');
 
+  final packageInfo = await PackageInfo.fromPlatform();
+
   // If the device is a phone, force portrait orientation
   // else force landscape orientation
   final view = WidgetsBinding.instance.platformDispatcher.views.first;
-  final logicalShortestSide = view.physicalSize.shortestSide / view.devicePixelRatio;
+  final logicalShortestSide =
+      view.physicalSize.shortestSide / view.devicePixelRatio;
 
   if (logicalShortestSide < 600) {
     SystemChrome.setPreferredOrientations([
@@ -44,6 +49,7 @@ void main() async {
       overrides: [
         sharedPrefsProvider.overrideWithValue(prefs),
         worklogBoxProvider.overrideWithValue(worklogBox),
+        packageInfoProvider.overrideWithValue(packageInfo),
       ],
       child: const WorkTrackApp(),
     ),

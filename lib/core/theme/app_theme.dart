@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:work_track/core/theme/typography.dart';
+import 'typography.dart';
 
 class AppTheme {
   static ThemeData build(WidgetRef ref) {

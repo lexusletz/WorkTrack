@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:work_track/features/dashboard/widgets/day_editor_panel.dart';
+import 'day_editor_panel.dart';
 import '../../../core/forecast/forecast_providers.dart';
 import '../../../core/settings/settings_providers.dart';
 import '../../../core/worklog/worklog_model.dart';

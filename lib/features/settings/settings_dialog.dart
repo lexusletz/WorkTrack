@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:work_track/features/settings/widgets/font_family_selector.dart';
+import '../../core/updater/updater_providers.dart';
+import 'widgets/font_family_selector.dart';
 import '../../core/settings/settings_model.dart';
 import '../../core/settings/settings_providers.dart';
 import '../../l10n/app_localizations.dart';
@@ -19,11 +20,13 @@ class SettingsDialog extends ConsumerStatefulWidget {
 class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   final _formKey = GlobalKey<FormState>();
   late Settings _draft;
+  String currentVersion = "";
 
   @override
   void initState() {
     super.initState();
     _draft = ref.read(settingsProvider).value ?? Settings.defaults;
+    currentVersion = ref.read(updaterProvider).currentVersion;
   }
 
   Future<void> _save() async {
@@ -111,6 +114,25 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                       child: Text(l10n.save, style: TextStyle(fontSize: 16)),
                     ),
                   ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  "Version Actual: v${ref.read(updaterProvider).currentVersion}",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "Made with ꨄ by Jordy Pinos︎",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),

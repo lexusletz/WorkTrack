@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:work_track/core/extensions/string_extension.dart';
+import '../../../core/extensions/string_extension.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
 import '../../../l10n/app_localizations.dart';

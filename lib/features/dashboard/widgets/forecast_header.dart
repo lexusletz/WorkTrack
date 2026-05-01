@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:work_track/l10n/app_localizations.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/forecast/forecast_providers.dart';
 import '../../../core/settings/settings_providers.dart';
 import 'stat_card.dart';

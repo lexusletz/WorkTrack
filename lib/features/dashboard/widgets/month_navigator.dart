@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:work_track/core/extensions/string_extension.dart';
+import '../../../core/extensions/string_extension.dart';
 import '../../../core/forecast/forecast_providers.dart';
 import '../../../l10n/app_localizations.dart';
 import '../state/dashboard_providers.dart';
