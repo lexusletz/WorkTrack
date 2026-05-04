@@ -5,12 +5,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'core/sync/device_discovery_service.dart';
+import 'core/sync/paired_devices_repository.dart';
+import 'core/sync/sync_orchestrator.dart';
+import 'core/sync/sync_providers.dart';
+import 'core/sync/sync_service.dart';
 import 'core/theme/app_theme.dart';
 import 'core/updater/updater_providers.dart';
 import 'l10n/app_localizations.dart';
 import 'core/settings/settings_providers.dart';
 import 'core/worklog/worklog_model.dart';
 import 'core/worklog/worklog_providers.dart';
+import 'core/worklog/worklog_repository.dart';
 import 'features/dashboard/dashboard_screen.dart';
 
 void main() async {
@@ -24,14 +30,23 @@ void main() async {
 
   final packageInfo = await PackageInfo.fromPlatform();
 
+  final syncOrchestrator = SyncOrchestrator(
+    discovery: DeviceDiscoveryService(),
+    pairedRepo: PairedDevicesRepository(prefs),
+    syncService: SyncService(
+      worklogRepo: WorkLogRepository(worklogBox),
+      prefs: prefs,
+    ),
+  );
+  await syncOrchestrator.initialize();
+
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     debugPrint('${record.level.name}: ${record.time}: ${record.message}');
   });
 
   final view = WidgetsBinding.instance.platformDispatcher.views.first;
-  final logicalShortestSide =
-      view.physicalSize.shortestSide / view.devicePixelRatio;
+  final logicalShortestSide = view.physicalSize.shortestSide / view.devicePixelRatio;
 
   if (logicalShortestSide < 600) {
     SystemChrome.setPreferredOrientations([
@@ -54,6 +69,7 @@ void main() async {
         sharedPrefsProvider.overrideWithValue(prefs),
         worklogBoxProvider.overrideWithValue(worklogBox),
         packageInfoProvider.overrideWithValue(packageInfo),
+        syncOrchestratorProvider.overrideWithValue(syncOrchestrator),
       ],
       child: const WorkTrackApp(),
     ),
