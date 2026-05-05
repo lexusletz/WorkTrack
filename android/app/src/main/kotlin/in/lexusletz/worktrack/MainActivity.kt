@@ -1,4 +1,4 @@
-package com.example.work_track
+package `in`.lexusletz.worktrack
 
 import io.flutter.embedding.android.FlutterActivity
 

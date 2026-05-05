@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/updater/updater_providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../settings/settings_dialog.dart';
+import '../sync/devices_screen.dart';
+import '../updater/updater_dialog.dart';
 import 'widgets/forecast_header.dart';
 import 'widgets/month_navigator.dart';
 import 'widgets/calendar_grid.dart';
@@ -33,24 +37,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       if (next.hasNewVersion) {
         await showDialog<void>(
           context: context,
-          builder: (_) => AlertDialog(
-            title: Text("Actualizacion Disponible - ${next.newVersion}"),
-            content: Text(
-              "La version ${next.newVersion} esta disponible. Deseas actualizar ahora?",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Más tarde"),
-              ),
-              FilledButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  ref.read(updaterProvider.notifier).downloadAndInstallUpdate();
-                },
-                child: const Text("Actualizar ahora"),
-              ),
-            ],
+          builder: (_) => UpdaterDialog(
+            version: next.newVersion,
+            onUpdateSelected: () {
+              Navigator.of(context).pop();
+              ref.read(updaterProvider.notifier).downloadAndInstallUpdate();
+            },
           ),
         );
       }
@@ -68,11 +60,41 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         centerTitle: false,
         actions: [
           IconButton(
+            icon: const Icon(Icons.devices),
+            tooltip: 'Dispositivos',
+            onPressed: () => {
+              if (Platform.isAndroid)
+                {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const DevicesScreen(),
+                    ),
+                  ),
+                }
+              else
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        "Sincronización no disponible en esta plataforma",
+                      ),
+                    ),
+                  ),
+                },
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             tooltip: l10n.settingsDialogTitle,
-            onPressed: () => showDialog<void>(
+            onPressed: () => showModalBottomSheet(
               context: context,
               builder: (_) => const SettingsDialog(),
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20)
+                )
+              )
             ),
           ),
         ],

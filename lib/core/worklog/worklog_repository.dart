@@ -12,6 +12,8 @@ class WorkLogRepository {
 
   Future<void> delete(DateTime d) => _box.delete(WorkLog.keyFor(d));
 
+  List<WorkLog> getAll() => _box.values.toList();
+
   List<WorkLog> forMonth(DateTime month) {
     final prefix = '${month.year.toString().padLeft(4, '0')}-'
         '${month.month.toString().padLeft(2, '0')}-';

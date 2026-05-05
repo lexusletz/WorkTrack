@@ -39,103 +39,101 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Dialog(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 480),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        l10n.settingsDialogTitle,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 480),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.settingsDialogTitle,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                HourlyRateField(
-                  value: _draft.hourlyRate,
-                  currencySymbol: _draft.currencySymbol,
-                  onChanged: (v) => setState(() {
-                    _draft = _draft.copyWith(hourlyRate: v);
-                  }),
-                ),
-                const SizedBox(height: 16),
-                WorkingDaysSelector(
-                  selected: _draft.workingDays,
-                  onChanged: (v) => setState(() {
-                    _draft = _draft.copyWith(workingDays: v);
-                  }),
-                ),
-                const SizedBox(height: 16),
-                StandardHoursField(
-                  value: _draft.standardHoursPerDay,
-                  onChanged: (v) => setState(() {
-                    _draft = _draft.copyWith(standardHoursPerDay: v);
-                  }),
-                ),
-                const SizedBox(height: 16),
-                CurrencySymbolField(
-                  value: _draft.currencySymbol,
-                  onChanged: (v) => setState(() {
-                    _draft = _draft.copyWith(currencySymbol: v);
-                  }),
-                ),
-                const SizedBox(height: 2),
-                FontFamilySelector(
-                  onChanged: (v) => setState(() {
-                    _draft = _draft.copyWith(fontFamily: v);
-                  }),
-                  value: _draft.fontFamily,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(l10n.cancel, style: TextStyle(fontSize: 16)),
-                    ),
-                    const SizedBox(width: 8),
-                    FilledButton(
-                      onPressed: _save,
-                      child: Text(l10n.save, style: TextStyle(fontSize: 16)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  "Version Actual: v${ref.read(updaterProvider).currentVersion}",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  "Made with ꨄ by Jordy Pinos︎",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
-                  textAlign: TextAlign.center,
+                ],
+              ),
+              const SizedBox(height: 24),
+              HourlyRateField(
+                value: _draft.hourlyRate,
+                currencySymbol: _draft.currencySymbol,
+                onChanged: (v) => setState(() {
+                  _draft = _draft.copyWith(hourlyRate: v);
+                }),
+              ),
+              const SizedBox(height: 16),
+              WorkingDaysSelector(
+                selected: _draft.workingDays,
+                onChanged: (v) => setState(() {
+                  _draft = _draft.copyWith(workingDays: v);
+                }),
+              ),
+              const SizedBox(height: 16),
+              StandardHoursField(
+                value: _draft.standardHoursPerDay,
+                onChanged: (v) => setState(() {
+                  _draft = _draft.copyWith(standardHoursPerDay: v);
+                }),
+              ),
+              const SizedBox(height: 16),
+              CurrencySymbolField(
+                value: _draft.currencySymbol,
+                onChanged: (v) => setState(() {
+                  _draft = _draft.copyWith(currencySymbol: v);
+                }),
+              ),
+              const SizedBox(height: 2),
+              FontFamilySelector(
+                onChanged: (v) => setState(() {
+                  _draft = _draft.copyWith(fontFamily: v);
+                }),
+                value: _draft.fontFamily,
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(l10n.cancel, style: TextStyle(fontSize: 16)),
+                  ),
+                  const SizedBox(width: 8),
+                  FilledButton(
+                    onPressed: _save,
+                    child: Text(l10n.save, style: TextStyle(fontSize: 16)),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "Version Actual: v${ref.read(updaterProvider).currentVersion}",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "Made with ꨄ by Jordy Pinos︎",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),

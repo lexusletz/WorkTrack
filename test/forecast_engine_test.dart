@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:work_track/core/forecast/forecast_engine.dart';
-import 'package:work_track/core/settings/settings_model.dart';
-import 'package:work_track/core/theme/typography.dart';
-import 'package:work_track/core/worklog/worklog_model.dart';
+import 'package:worktrack/core/forecast/forecast_engine.dart';
+import 'package:worktrack/core/settings/settings_model.dart';
+import 'package:worktrack/core/theme/typography.dart';
+import 'package:worktrack/core/worklog/worklog_model.dart';
 
 void main() {
   const settings = Settings(
