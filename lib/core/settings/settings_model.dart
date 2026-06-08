@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import '../theme/typography.dart';
 
 @immutable
 class Settings {
@@ -9,7 +8,6 @@ class Settings {
     required this.workingDays,
     required this.standardHoursPerDay,
     required this.currencySymbol,
-    required this.fontFamily,
   });
 
   final double hourlyRate;
@@ -17,10 +15,8 @@ class Settings {
   final double standardHoursPerDay;
   final String currencySymbol;
 
-  final FontFamilyOptions fontFamily;
-
   static const defaults = Settings(
-    hourlyRate: 0,
+    hourlyRate: 8.5,
     workingDays: {
       DateTime.monday,
       DateTime.tuesday,
@@ -30,7 +26,6 @@ class Settings {
     },
     standardHoursPerDay: 8,
     currencySymbol: r'$',
-    fontFamily: FontFamilyOptions.FREDOKA,
   );
 
   Settings copyWith({
@@ -38,14 +33,12 @@ class Settings {
     Set<int>? workingDays,
     double? standardHoursPerDay,
     String? currencySymbol,
-    FontFamilyOptions? fontFamily,
   }) {
     return Settings(
       hourlyRate: hourlyRate ?? this.hourlyRate,
       workingDays: workingDays ?? this.workingDays,
       standardHoursPerDay: standardHoursPerDay ?? this.standardHoursPerDay,
       currencySymbol: currencySymbol ?? this.currencySymbol,
-      fontFamily: fontFamily ?? this.fontFamily,
     );
   }
 
@@ -54,7 +47,6 @@ class Settings {
     'workingDays': workingDays.toList(),
     'standardHoursPerDay': standardHoursPerDay,
     'currencySymbol': currencySymbol,
-    'fontFamily': fontFamily.name,
   };
 
   factory Settings.fromJson(Map<String, dynamic> j) => Settings(
@@ -62,10 +54,6 @@ class Settings {
     workingDays: Set<int>.from(j['workingDays'] as List),
     standardHoursPerDay: (j['standardHoursPerDay'] as num).toDouble(),
     currencySymbol: j['currencySymbol'] as String,
-    fontFamily: FontFamilyOptions.values.firstWhere(
-      (e) => e.name == j['fontFamily'],
-      orElse: () => FontFamilyOptions.FREDOKA,
-    ),
   );
 
   String toJsonString() => jsonEncode(toJson());
@@ -79,8 +67,7 @@ class Settings {
           hourlyRate == other.hourlyRate &&
           setEquals(workingDays, other.workingDays) &&
           standardHoursPerDay == other.standardHoursPerDay &&
-          currencySymbol == other.currencySymbol &&
-          fontFamily == other.fontFamily;
+          currencySymbol == other.currencySymbol;
 
   @override
   int get hashCode => Object.hash(

@@ -2,17 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import '../settings/settings_model.dart';
 
-enum DayStatus { PENDING, COMPLETED, MISSED, EXTRA, NONWORKDAY }
+enum DayStatus {
+  /// When a day hasn't been registered.
+  WORKDAY,
+
+  /// No work day, holiday or absent
+  NONWORKDAY
+}
 
 DayStatus dayStatusFor(DateTime day, WorkLog? log, Settings settings) {
-  if (log == null) {
     return settings.workingDays.contains(day.weekday)
-        ? DayStatus.PENDING
+        ? DayStatus.WORKDAY
         : DayStatus.NONWORKDAY;
-  }
-  if (log.hoursWorked == 0) return DayStatus.MISSED;
-  if (log.isExtraDay) return DayStatus.EXTRA;
-  return DayStatus.COMPLETED;
 }
 
 @immutable
@@ -20,14 +21,10 @@ class WorkLog {
   const WorkLog({
     required this.date,
     required this.hoursWorked,
-    this.isExtraDay = false,
-    this.notes,
   });
 
   final DateTime date;
   final double hoursWorked;
-  final bool isExtraDay;
-  final String? notes;
 
   static String keyFor(DateTime d) =>
       '${d.year.toString().padLeft(4, '0')}-'
@@ -39,14 +36,10 @@ class WorkLog {
   WorkLog copyWith({
     DateTime? date,
     double? hoursWorked,
-    bool? isExtraDay,
-    String? notes,
   }) {
     return WorkLog(
       date: date ?? this.date,
       hoursWorked: hoursWorked ?? this.hoursWorked,
-      isExtraDay: isExtraDay ?? this.isExtraDay,
-      notes: notes ?? this.notes,
     );
   }
 
@@ -55,12 +48,10 @@ class WorkLog {
       identical(this, other) ||
       other is WorkLog &&
           date == other.date &&
-          hoursWorked == other.hoursWorked &&
-          isExtraDay == other.isExtraDay &&
-          notes == other.notes;
+          hoursWorked == other.hoursWorked;
 
   @override
-  int get hashCode => Object.hash(date, hoursWorked, isExtraDay, notes);
+  int get hashCode => Object.hash(date, hoursWorked);
 }
 
 class WorkLogAdapter extends TypeAdapter<WorkLog> {
@@ -72,8 +63,6 @@ class WorkLogAdapter extends TypeAdapter<WorkLog> {
     return WorkLog(
       date: DateTime.fromMillisecondsSinceEpoch(reader.readInt()),
       hoursWorked: reader.readDouble(),
-      isExtraDay: reader.readBool(),
-      notes: reader.readBool() ? reader.readString() : null,
     );
   }
 
@@ -81,8 +70,5 @@ class WorkLogAdapter extends TypeAdapter<WorkLog> {
   void write(BinaryWriter writer, WorkLog obj) {
     writer.writeInt(obj.date.millisecondsSinceEpoch);
     writer.writeDouble(obj.hoursWorked);
-    writer.writeBool(obj.isExtraDay);
-    writer.writeBool(obj.notes != null);
-    if (obj.notes != null) writer.writeString(obj.notes!);
   }
 }

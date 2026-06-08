@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'calendar_navigation.dart';
 import 'day_editor_panel.dart';
 import '../../../core/forecast/forecast_providers.dart';
 import '../../../core/settings/settings_providers.dart';
@@ -21,7 +22,9 @@ class CalendarGrid extends ConsumerWidget {
     final now = ref.read(nowProvider);
     final today = DateTime(now.year, now.month, now.day);
 
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
+
     final weekdayHeaders = [
       l10n.monShort,
       l10n.tueShort,
@@ -49,9 +52,12 @@ class CalendarGrid extends ConsumerWidget {
     final leadingBlanks = firstWeekday - 1;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        CalendarNavigation(),
+
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
             children: weekdayHeaders
                 .map(
@@ -59,9 +65,10 @@ class CalendarGrid extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         h,
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -70,69 +77,66 @@ class CalendarGrid extends ConsumerWidget {
                 .toList(),
           ),
         ),
-        Expanded(
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(
-              context,
-            ).copyWith(scrollbars: false),
-            child: GridView.builder(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 7,
-                childAspectRatio: 1,
-                mainAxisExtent: MediaQuery.of(context).size.width <= 600
-                    ? 90
-                    : 180,
-              ),
-              itemCount: leadingBlanks + daysInMonth,
-              itemBuilder: (_, i) {
-                if (i < leadingBlanks) return const SizedBox.shrink();
-                final dayNum = i - leadingBlanks + 1;
-                final date = DateTime(
-                  browsedMonth.year,
-                  browsedMonth.month,
-                  dayNum,
-                );
-                final log = logMap[WorkLog.keyFor(date)];
-                final status = settings != null
-                    ? dayStatusFor(date, log, settings)
-                    : DayStatus.NONWORKDAY;
-                final isSelected =
-                    selectedDay != null &&
-                    selectedDay.year == date.year &&
-                    selectedDay.month == date.month &&
-                    selectedDay.day == date.day;
-                final isToday = date == today;
 
-                return DayCell(
-                  day: dayNum,
-                  status: status,
-                  isSelected: isSelected,
-                  isToday: isToday,
-                  hoursWorked: log?.hoursWorked,
-                  onTap: () {
-                    ref.read(selectedDayProvider.notifier).state = date;
-                    if (MediaQuery.of(context).size.width < 600) {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        useSafeArea: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        builder: (_) => DayEditorPanel(
-                          onSaved: () => Navigator.of(context).pop(),
-                        ),
-                      ).then((_) {
-                        ref.read(selectedDayProvider.notifier).state = null;
-                      });
-                    }
-                  },
-                );
-              },
+        // TODO: Improve this functionality
+        // Add a `PageView` to change the month horizontally, updating the 
+        // values of the `Forecast`
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.only(bottom: 8),
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 7, // The number of days in a week
+              childAspectRatio: 1.15,
             ),
+            itemCount: leadingBlanks + daysInMonth,
+            itemBuilder: (_, i) {
+              if (i < leadingBlanks) return const SizedBox.shrink();
+
+              final dayNum = i - leadingBlanks + 1;
+
+              final date = DateTime(
+                browsedMonth.year,
+                browsedMonth.month,
+                dayNum,
+              );
+
+              final log = logMap[WorkLog.keyFor(date)];
+              final status = settings != null
+                  ? dayStatusFor(date, log, settings)
+                  : DayStatus.NONWORKDAY;
+              final isSelected =
+                  selectedDay != null &&
+                  selectedDay.year == date.year &&
+                  selectedDay.month == date.month &&
+                  selectedDay.day == date.day;
+              final isToday = date == today;
+
+              return DayCell(
+                day: dayNum,
+                status: status,
+                isSelected: isSelected,
+                isToday: isToday,
+                hoursWorked: log?.hoursWorked,
+                onTap: () {
+                  ref.read(selectedDayProvider.notifier).state = date;
+                  if (MediaQuery.of(context).size.width < 600) {
+                    showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      isDismissible: true,
+                      backgroundColor: const Color(0xFF16201b),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(28),
+                        ),
+                      ),
+                      builder: (_) => DayEditorPanel(),
+                    );
+                  }
+                },
+              );
+            },
           ),
         ),
       ],

@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:worktrack/core/forecast/forecast_engine.dart';
 import 'package:worktrack/core/settings/settings_model.dart';
-import 'package:worktrack/core/theme/typography.dart';
 import 'package:worktrack/core/worklog/worklog_model.dart';
 
 void main() {
@@ -16,7 +15,6 @@ void main() {
     },
     standardHoursPerDay: 8,
     currencySymbol: r'$',
-    fontFamily: FontFamilyOptions.FREDOKA,
   );
 
   // Use April 2026 as test month (known structure)
@@ -80,30 +78,12 @@ void main() {
     expect(f.accumulated, 0);
   });
 
-  test(
-    'explicit 0h log on past workday → accumulated unchanged, status missed',
-    () {
-      final today = DateTime(2026, 4, 3);
-      final logs = [WorkLog(date: DateTime(2026, 4, 1), hoursWorked: 0)];
-      final f = ForecastEngine.compute(
-        settings: settings,
-        monthLogs: logs,
-        today: today,
-        month: today,
-      );
-      expect(f.accumulated, 0);
-      final status = dayStatusFor(DateTime(2026, 4, 1), logs.first, settings);
-      expect(status, DayStatus.MISSED);
-    },
-  );
-
   test('extra-day Saturday with 4h adds to accumulated, not target', () {
     final today = DateTime(2026, 4, 5); // Sunday (past)
     final logs = [
       WorkLog(
         date: DateTime(2026, 4, 4), // Saturday
         hoursWorked: 4,
-        isExtraDay: true,
       ),
     ];
     final targetBefore = ForecastEngine.compute(

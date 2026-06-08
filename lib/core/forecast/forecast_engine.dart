@@ -25,6 +25,7 @@ class ForecastEngine {
 
     double accumulated = 0;
     double remaining = 0;
+    int remainingDays = 0;
     double target = 0;
 
     for (
@@ -43,8 +44,10 @@ class ForecastEngine {
       } else {
         if (log != null) {
           remaining += log.hoursWorked * rate;
+          remainingDays++;
         } else if (isWorkDay) {
           remaining += settings.standardHoursPerDay * rate;
+          remainingDays++;
         }
       }
     }
@@ -52,6 +55,7 @@ class ForecastEngine {
     return Forecast(
       accumulated: accumulated,
       remaining: remaining,
+      remainingDays: remainingDays,
       estimate: accumulated + remaining,
       target: target,
     );

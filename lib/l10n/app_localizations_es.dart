@@ -103,4 +103,44 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get fontFamilyLabel => 'Tipo de letra';
+
+  @override
+  String get devicesTooltip => 'Dispositivos';
+
+  @override
+  String get settingsTooltip => 'Ajustes';
+
+  @override
+  String get devicesPlatformNotSupported =>
+      'Sincronización no disponible para esta plataforma';
+
+  @override
+  String get updateDialogTitle => 'Actualización disponible -';
+
+  @override
+  String get goalLabel => 'META';
+
+  @override
+  String get projectionLabel => 'proyección';
+
+  @override
+  String get remainingDaysLabel => 'd';
+
+  @override
+  String get hoursShortLabel => 'Horas';
+
+  @override
+  String get dailyLogLabel => 'D-LOG';
+
+  @override
+  String get rateLabel => 'Tarifa';
+
+  @override
+  String get perHourAbbreviation => '/h';
+
+  @override
+  String get liveLabel => 'EN VIVO';
+
+  @override
+  String get startShiftLabel => 'Iniciar Turno';
 }

@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'typography.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static ThemeData build(WidgetRef ref) {
-    final textTheme = ref.watch(textThemeProvider);
+  static final ColorScheme _appColorScheme = ColorScheme.dark(
+    surface: const Color(0xFF0e1411),
+    surfaceContainerHighest: const Color(0xFF1F2C26),
+    outline: Colors.white.withValues(alpha: 0.06),
 
+    onSurface: const Color(0xFF5c6b62),
+    onSurfaceVariant: const Color(0xFF5C6B62),
+
+    primary: const Color(0xFF7BD389),
+    primaryContainer: const Color(0xFF1F2C26),
+    error: const Color(0xFFFF6B5B),
+    tertiary: const Color(0xFFE8B86C)
+  );
+
+  static ThemeData build(WidgetRef ref) {
     return ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF1A237E),
-        brightness: Brightness.light,
-      ),
+      colorScheme: _appColorScheme,
       useMaterial3: true,
-      textTheme: textTheme,
+      textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
     );
   }
 }

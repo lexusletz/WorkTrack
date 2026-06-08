@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:worktrack/core/settings/settings_model.dart';
-import 'package:worktrack/core/theme/typography.dart';
 
 void main() {
   group('Settings', () {
@@ -10,7 +9,6 @@ void main() {
         workingDays: {DateTime.monday, DateTime.wednesday, DateTime.friday},
         standardHoursPerDay: 7.5,
         currencySymbol: '€',
-        fontFamily: FontFamilyOptions.FREDOKA,
       );
 
       final roundTripped = Settings.fromJsonString(original.toJsonString());

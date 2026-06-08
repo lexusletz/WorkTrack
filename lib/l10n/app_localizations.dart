@@ -289,6 +289,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Font Family'**
   String get fontFamilyLabel;
+
+  /// Tooltip of the devices button
+  ///
+  /// In en, this message translates to:
+  /// **'Devices'**
+  String get devicesTooltip;
+
+  /// Tooltip of the settings button
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTooltip;
+
+  /// No description provided for @devicesPlatformNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Synchronization not available on this platform'**
+  String get devicesPlatformNotSupported;
+
+  /// No description provided for @updateDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Available - '**
+  String get updateDialogTitle;
+
+  /// Label for the goal amount
+  ///
+  /// In en, this message translates to:
+  /// **'GOAL'**
+  String get goalLabel;
+
+  /// Label for the projection subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'projection'**
+  String get projectionLabel;
+
+  /// Abbreviation for days remaining
+  ///
+  /// In en, this message translates to:
+  /// **'d'**
+  String get remainingDaysLabel;
+
+  /// Short label for hours in bottom info
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get hoursShortLabel;
+
+  /// Label for daily log in bottom info
+  ///
+  /// In en, this message translates to:
+  /// **'D-LOG'**
+  String get dailyLogLabel;
+
+  /// Label for rate in bottom info
+  ///
+  /// In en, this message translates to:
+  /// **'Rate'**
+  String get rateLabel;
+
+  /// Abbreviation for per hour
+  ///
+  /// In en, this message translates to:
+  /// **'/h'**
+  String get perHourAbbreviation;
+
+  /// Label for the live indicator in header
+  ///
+  /// In en, this message translates to:
+  /// **'LIVE'**
+  String get liveLabel;
+
+  /// Label for the start shift button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Shift'**
+  String get startShiftLabel;
 }
 
 class _AppLocalizationsDelegate

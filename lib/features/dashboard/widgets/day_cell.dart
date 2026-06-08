@@ -19,19 +19,19 @@ class DayCell extends StatelessWidget {
   final double? hoursWorked;
   final VoidCallback onTap;
 
-  static const _statusColors = {
-    DayStatus.PENDING: Color(0xFFBDBDBD),
-    DayStatus.COMPLETED: Color(0xFF66BB6A),
-    DayStatus.MISSED: Color(0xFFEF5350),
-    DayStatus.EXTRA: Color(0xFF5C6BC0),
+  static final _statusColors = {
+    DayStatus.WORKDAY: const Color(0xFF16201b),
     DayStatus.NONWORKDAY: Colors.transparent,
+  };
+
+  static final _textColors = {
+    DayStatus.WORKDAY: const Color(0xFF9aa59e),
+    DayStatus.NONWORKDAY: const Color(0xFF5c6b62),
   };
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final dotColor = _statusColors[status]!;
-    final isNonWorkday = status == DayStatus.NONWORKDAY;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap: onTap,
@@ -39,61 +39,35 @@ class DayCell extends StatelessWidget {
         duration: const Duration(milliseconds: 120),
         margin: const EdgeInsets.all(3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(4),
           border: isSelected
-              ? Border.all(color: theme.colorScheme.primary, width: 2)
+              ? Border.all(color: colorScheme.primary, width: 2)
               : isToday
-              ? Border.all(
-                  color: theme.colorScheme.primary.withAlpha(100),
-                  width: 1,
-                )
+              ? Border.all(color: colorScheme.primary.withAlpha(100), width: 1)
               : null,
-          color: isSelected
-              ? theme.colorScheme.primaryContainer.withAlpha(80)
-              : _statusColors[status]?.withAlpha(30),
+          color: _statusColors[status],
         ),
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    '$day',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                      color: isNonWorkday
-                          ? theme.colorScheme.onSurface.withAlpha(80)
-                          : null,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const Spacer(),
-                  if (!isNonWorkday)
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: dotColor,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                ],
+              Text(
+                day.toString().padLeft(2, '0'),
+                style: TextStyle(
+                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                  color: _textColors[status],
+                  fontSize: 12,
+                ),
               ),
-              const Spacer(),
-              if (hoursWorked != null)
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    '${hoursWorked!.toStringAsFixed(hoursWorked! % 1 == 0 ? 0 : 1)}h',
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: isNonWorkday
-                          ? theme.colorScheme.onSurface.withAlpha(80)
-                          : dotColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
+              Spacer(),
+              if (hoursWorked != null && hoursWorked != null && hoursWorked! > 0)
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF7bd389),
+                    shape: BoxShape.circle,
                   ),
                 ),
             ],

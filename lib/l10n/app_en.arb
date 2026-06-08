@@ -127,5 +127,54 @@
     "fontFamilyLabel": "Font Family",
     "@fontFamilyLabel": {
         "description": "Label for the font family"
+    },
+    "devicesTooltip": "Devices",
+    "@devicesTooltip": {
+        "description": "Tooltip of the devices button"
+    },
+    "settingsTooltip": "Settings",
+    "@settingsTooltip": {
+        "description": "Tooltip of the settings button"
+    },
+    "devicesPlatformNotSupported": "Synchronization not available on this platform",
+    "@devicesPlatformNotSupported": {
+        "descriptions": "Snackbar message"
+    },
+    "updateDialogTitle": "Update Available - ",
+    "goalLabel": "GOAL",
+    "@goalLabel": {
+        "description": "Label for the goal amount"
+    },
+    "projectionLabel": "projection",
+    "@projectionLabel": {
+        "description": "Label for the projection subtitle"
+    },
+    "remainingDaysLabel": "d",
+    "@remainingDaysLabel": {
+        "description": "Abbreviation for days remaining"
+    },
+    "hoursShortLabel": "Hours",
+    "@hoursShortLabel": {
+        "description": "Short label for hours in bottom info"
+    },
+    "dailyLogLabel": "D-LOG",
+    "@dailyLogLabel": {
+        "description": "Label for daily log in bottom info"
+    },
+    "rateLabel": "Rate",
+    "@rateLabel": {
+        "description": "Label for rate in bottom info"
+    },
+    "perHourAbbreviation": "/h",
+    "@perHourAbbreviation": {
+        "description": "Abbreviation for per hour"
+    },
+    "liveLabel": "LIVE",
+    "@liveLabel": {
+        "description": "Label for the live indicator in header"
+    },
+    "startShiftLabel": "Start Shift",
+    "@startShiftLabel": {
+        "description": "Label for the start shift button"
     }
 }

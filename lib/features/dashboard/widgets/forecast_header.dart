@@ -15,8 +15,10 @@ class ForecastHeader extends ConsumerWidget {
     final settingsAsync = ref.watch(settingsProvider);
     final symbol = settingsAsync.value?.currencySymbol ?? r'$';
 
-    String fmt(double v) =>
-        NumberFormat.currency(symbol: symbol, decimalDigits: 2).format(v);
+    String fmt(double v) => NumberFormat.currency(
+      symbol: symbol,
+      decimalDigits: 2
+    ).format(v);
 
     return forecastAsync.when(
       loading: () => const Padding(

@@ -5,19 +5,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'core/sync/device_discovery_service.dart';
-import 'core/sync/paired_devices_repository.dart';
-import 'core/sync/sync_orchestrator.dart';
-import 'core/sync/sync_providers.dart';
-import 'core/sync/sync_service.dart';
 import 'core/theme/app_theme.dart';
 import 'core/updater/updater_providers.dart';
+import 'features/dashboard/dashboard_screen_v2.dart';
 import 'l10n/app_localizations.dart';
 import 'core/settings/settings_providers.dart';
 import 'core/worklog/worklog_model.dart';
 import 'core/worklog/worklog_providers.dart';
-import 'core/worklog/worklog_repository.dart';
-import 'features/dashboard/dashboard_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,16 +23,6 @@ void main() async {
   final worklogBox = await Hive.openBox<WorkLog>('worklogs');
 
   final packageInfo = await PackageInfo.fromPlatform();
-
-  final syncOrchestrator = SyncOrchestrator(
-    discovery: DeviceDiscoveryService(),
-    pairedRepo: PairedDevicesRepository(prefs),
-    syncService: SyncService(
-      worklogRepo: WorkLogRepository(worklogBox),
-      prefs: prefs,
-    ),
-  );
-  await syncOrchestrator.initialize();
 
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
@@ -60,8 +44,11 @@ void main() async {
     ]);
   }
 
-  // Hide system UI (status bar, navigation bar)
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  // Hide system UI (navigation bar)
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top],
+  );
 
   runApp(
     ProviderScope(
@@ -69,7 +56,6 @@ void main() async {
         sharedPrefsProvider.overrideWithValue(prefs),
         worklogBoxProvider.overrideWithValue(worklogBox),
         packageInfoProvider.overrideWithValue(packageInfo),
-        syncOrchestratorProvider.overrideWithValue(syncOrchestrator),
       ],
       child: const WorkTrackApp(),
     ),
@@ -88,7 +74,7 @@ class WorkTrackApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: theme,
-      home: const DashboardScreen(),
+      home: const DashboardScreenV2(),
     );
   }
 }

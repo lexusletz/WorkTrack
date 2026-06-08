@@ -25,7 +25,7 @@ class HourlyRateField extends StatelessWidget {
         border: const OutlineInputBorder(),
         labelStyle: TextStyle(fontSize: 16),
       ),
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
       ],
