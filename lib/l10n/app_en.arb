@@ -169,10 +169,6 @@
     "@perHourAbbreviation": {
         "description": "Abbreviation for per hour"
     },
-    "liveLabel": "LIVE",
-    "@liveLabel": {
-        "description": "Label for the live indicator in header"
-    },
     "startShiftLabel": "Start Shift",
     "@startShiftLabel": {
         "description": "Label for the start shift button"

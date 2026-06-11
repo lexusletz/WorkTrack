@@ -356,12 +356,6 @@ abstract class AppLocalizations {
   /// **'/h'**
   String get perHourAbbreviation;
 
-  /// Label for the live indicator in header
-  ///
-  /// In en, this message translates to:
-  /// **'LIVE'**
-  String get liveLabel;
-
   /// Label for the start shift button
   ///
   /// In en, this message translates to:

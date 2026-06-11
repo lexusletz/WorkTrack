@@ -43,7 +43,6 @@
     "dailyLogLabel": "D-LOG",
     "rateLabel": "Tarifa",
     "perHourAbbreviation": "/h",
-    "liveLabel": "EN VIVO",
     "startShiftLabel": "Iniciar Turno"
 }
 

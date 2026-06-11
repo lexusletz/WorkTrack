@@ -139,8 +139,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get perHourAbbreviation => '/h';
 
   @override
-  String get liveLabel => 'LIVE';
-
-  @override
   String get startShiftLabel => 'Start Shift';
 }
