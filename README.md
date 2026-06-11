@@ -1,19 +1,25 @@
-# Project Specification: Income Tracker & Forecaster (macOS)
+# Project Specification: Income Tracker & Forecaster
 
 ### Overview
-An application designed for macOS to track daily earnings based on hours worked and provide a real-time financial forecast for the end of the month. The app focuses on local data persistence and dynamic recalculation.
+An application designed for iOS to track daily earnings based on hours worked
+and provide a real-time financial forecast for the end of the month. The app
+focuses on local data persistence and dynamic recalculation.
 
 ### Core Objective
-To bridge the gap between "scheduled income" and "actual income." The app must allow the user to define a standard work schedule while allowing daily overrides that immediately update the projected monthly total.
+To bridge the gap between "scheduled income" and "actual income." The app must
+allow the user to define a standard work schedule while allowing daily
+overrides that immediately update the projected monthly total.
 
 #### Functional Requirements
 1. Configuration & Constants (User Settings)
 
    - Hourly Rate: The base currency value per hour.
 
-   - Standard Schedule: A definition of "working days" (e.g., Mon-Fri) and "standard hours" (e.g., 8h/day).
+   - Standard Schedule: A definition of "working days" (e.g., Mon-Fri) and
+     "standard hours" (e.g., 8h/day).
 
-   - Monthly Target: A calculation of potential income if all standard hours are met.
+   - Monthly Target: A calculation of potential income if all standard hours
+     are met.
 
 2. Daily Logging System
 
@@ -32,34 +38,14 @@ To bridge the gap between "scheduled income" and "actual income." The app must a
 3. Dynamic Calculation Engine
    The app must handle three primary variables to generate the forecast:
 
-   1. Accumulated Income: (Total hours worked so far this month) * (Hourly Rate).
+   1. Accumulated Income: (Total hours worked so far this month) * (Hourly
+      Rate).
 
-   2. Remaining Potential: (Standard hours in remaining workdays) * (Hourly Rate).
+   2. Remaining Potential: (Standard hours in remaining workdays) * (Hourly
+      Rate).
 
    3. Monthly Estimate: Accumulated Income + Remaining Potential.
  
-### Data Schema (Local Persistence)
-- **Storage**: Local-only (Hive or SQFlite).
-
-- **WorkLog Model**:
-
-  - `date`: DateTime (Primary Key).
-
-  - `hoursWorked`: Double.
-
-  - `isExtraDay`: Boolean (for weekends or overtime).
-
-  - notes`: String (Optional).
-
-### Technical Stack (Flutter/macOS)
-- **Framework*: Flutter (Desktop).
-
-- **Platform**: macOS.
-
-- **State Management**: Any reactive approach (Provider/Riverpod) to ensure that changing a single day's hours updates the "Monthly Estimate" header instantly.
-
-- **Persistence**: path_provider (to access macOS application documents) and a lightweight database.
-
 ### User Flow
 1. **Setup**: User enters their hourly rate and typical weekly schedule.
 
