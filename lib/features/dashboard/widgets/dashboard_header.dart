@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../../../l10n/app_localizations.dart';
 import '../../settings/settings_screen.dart';
 
 class DashboardHeader extends StatelessWidget {
@@ -46,8 +45,7 @@ class DashboardHeader extends StatelessWidget {
         Row(
           children: [
             Text(
-              "${AppLocalizations.of(context)!.liveLabel} • $month$day"
-                  .toUpperCase(),
+              "$month $day".toUpperCase(),
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w600,
