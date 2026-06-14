@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../../settings/settings_screen.dart';
+import '../../preferences/preferences_screen.dart';
 
 class DashboardHeader extends StatelessWidget {
   const DashboardHeader({super.key});
@@ -42,41 +42,29 @@ class DashboardHeader extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: [
-            Text(
-              "$month $day".toUpperCase(),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w600,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const PreferencesScreen()),
+            );
+          },
+          child: Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                width: 2
+              ),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Center(
+              child: Icon(
+                LucideIcons.settings,
+                size: 18,
               ),
             ),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                );
-              },
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    width: 2
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Center(
-                  child: Icon(
-                    LucideIcons.settings,
-                    size: 18,
-                  ),
-                ),
-              ),
-            )
-          ],
+          ),
         ),
       ],
     );

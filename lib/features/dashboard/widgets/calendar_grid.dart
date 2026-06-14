@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'calendar_navigation.dart';
+import '../../../core/preferences/preferences_providers.dart';
 import 'day_editor_panel.dart';
 import '../../../core/forecast/forecast_providers.dart';
-import '../../../core/settings/settings_providers.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
 import '../../../l10n/app_localizations.dart';
@@ -17,7 +16,7 @@ class CalendarGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final browsedMonth = ref.watch(browsedMonthProvider);
     final selectedDay = ref.watch(selectedDayProvider);
-    final settingsAsync = ref.watch(settingsProvider);
+    final settingsAsync = ref.watch(preferencesProvider);
     final logsAsync = ref.watch(worklogsForMonthProvider(browsedMonth));
     final now = ref.read(nowProvider);
     final today = DateTime(now.year, now.month, now.day);
@@ -54,8 +53,6 @@ class CalendarGrid extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CalendarNavigation(),
-
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(

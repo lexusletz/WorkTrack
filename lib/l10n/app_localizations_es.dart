@@ -118,7 +118,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get updateDialogTitle => 'Actualización disponible -';
 
   @override
-  String get goalLabel => 'META';
+  String get goalLabel => 'OBJETIVO';
 
   @override
   String get projectionLabel => 'proyección';

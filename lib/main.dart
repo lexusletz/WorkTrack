@@ -5,11 +5,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'core/preferences/preferences_providers.dart';
 import 'core/theme/app_theme.dart';
 import 'core/updater/updater_providers.dart';
-import 'features/dashboard/dashboard_screen_v2.dart';
+import 'features/dashboard/dashboard_screen.dart';
 import 'l10n/app_localizations.dart';
-import 'core/settings/settings_providers.dart';
 import 'core/worklog/worklog_model.dart';
 import 'core/worklog/worklog_providers.dart';
 
@@ -74,7 +74,7 @@ class WorkTrackApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: theme,
-      home: const DashboardScreenV2(),
+      home: const DashboardScreen(),
     );
   }
 }

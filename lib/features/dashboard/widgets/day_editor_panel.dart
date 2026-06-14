@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/settings/settings_providers.dart';
+import '../../../core/preferences/preferences_providers.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
@@ -45,7 +45,7 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
     final selectedDay = ref.read(selectedDayProvider);
     if (selectedDay == null) return;
 
-    final settings = ref.read(settingsProvider);
+    final settings = ref.read(preferencesProvider);
     final month = DateTime(selectedDay.year, selectedDay.month);
     final logsAsync = ref.read(worklogsForMonthProvider(month));
 
@@ -61,15 +61,15 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
 
     setState(() {
       _initialized = true;
-      _hours = log?.hoursWorked ?? settings.value!.standardHoursPerDay;
+      _hours = log?.hoursWorked ?? settings.value!.dailyTargetHours;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final selectedDay = ref.watch(selectedDayProvider);
-    final settingsAsync = ref.watch(settingsProvider);
-    final symbol = settingsAsync.value?.currencySymbol ?? r'$';
+    final settingsAsync = ref.watch(preferencesProvider);
+    final symbol = settingsAsync.value?.currency ?? r'$';
     final hourPrice = settingsAsync.value?.hourlyRate ?? 0.0;
 
     if (selectedDay == null) {
@@ -104,18 +104,9 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
             ),
           ),
           SizedBox(height: 18),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                AppDateUtils.getFormattedDate(selectedDay),
-                style: TextStyle(fontSize: 16, color: colorScheme.onSurface),
-              ),
-              Text(
-                "EDIT",
-                style: TextStyle(color: colorScheme.primary),
-              ),
-            ],
+          Text(
+            AppDateUtils.getFormattedDate(selectedDay),
+            style: TextStyle(fontSize: 16, color: colorScheme.onSurface),
           ),
           const SizedBox(height: 20),
           HourField(
@@ -131,7 +122,7 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "EQUIV",
+                "EQUIVALE A",
                 style: TextStyle(
                   color: const Color(0xFF9aa59e),
                 ),
@@ -162,7 +153,7 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
               ),
               child: Center(
                 child: Text(
-                  "CONFIRM",
+                  "CONFIRMAR",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

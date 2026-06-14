@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/settings/settings_model.dart';
-import '../../core/settings/settings_providers.dart';
-import 'widgets/currency_symbol_section.dart';
+import '../../core/preferences/preferences_model.dart';
+import '../../core/preferences/preferences_providers.dart';
 import 'widgets/hourly_rate_section.dart';
 import 'widgets/options_section.dart';
-import 'widgets/settings_header.dart';
+import 'widgets/preferences_header.dart';
+import 'widgets/working_days_section.dart';
 
-class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({super.key});
+class PreferencesScreen extends ConsumerStatefulWidget {
+  const PreferencesScreen({super.key});
 
   @override
-  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<PreferencesScreen> createState() => _PreferencesScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-
-  late Settings _draft;
+class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
+  late Preferences _draft;
 
   @override
   void initState() {
     super.initState();
 
-    _draft = ref.read(settingsProvider).value ?? Settings.defaults;
+    _draft = ref.read(preferencesProvider).value ?? Preferences.defaults;
   }
 
   Future<void> _save() async {
-    await ref.read(settingsProvider.notifier).saveSettings(_draft);
+    await ref.read(preferencesProvider.notifier).savePreferences(_draft);
     if (mounted) Navigator.of(context).pop();
   }
 
@@ -44,18 +43,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     children: [
-                      SettingsHeader(),
+                      PreferencesHeader(),
                       SizedBox(height: 18),
                       HourlyRateSection(
                         value: _draft.hourlyRate,
                         onChange: (value) {
                           setState(() {
                             _draft = _draft.copyWith(hourlyRate: value);
-                          }); 
+                          });
                         },
                       ),
                       SizedBox(height: 18),
-                      CurrencySymbolSection(),
+                      WorkingDaysSection(
+                        selectedWorkingDays: _draft.workingDays,
+                        onChange: (workingDays) {
+                          setState(() {
+                            _draft = _draft.copyWith(workingDays: workingDays);
+                          });
+                        },
+                      ),
+                      // SizedBox(height: 18),
+                      // CurrencySymbolSection(),
                     ],
                   ),
                 ),

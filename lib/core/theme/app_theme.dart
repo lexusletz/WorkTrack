@@ -21,7 +21,7 @@ class AppTheme {
     return ThemeData(
       colorScheme: _appColorScheme,
       useMaterial3: true,
-      textTheme: GoogleFonts.jetBrainsMonoTextTheme(),
+      textTheme: GoogleFonts.geologicaTextTheme(),
     );
   }
 }

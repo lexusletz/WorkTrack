@@ -13,7 +13,7 @@ class CurrencySymbolSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "02 • CURRENCY SYMBOL",
+          "03 • CURRENCY SYMBOL",
           style: TextStyle(color: Color(0xFF9aa59e)),
         ),
         Text("USED EVERYWHERE", style: TextStyle(color: Color(0xFF5c6b62))),

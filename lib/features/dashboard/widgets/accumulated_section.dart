@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/forecast/forecast_providers.dart';
-import '../../../core/settings/settings_providers.dart';
+import '../../../core/preferences/preferences_providers.dart';
 import '../../../core/utils/currency_utils.dart';
 import '../../../core/utils/double_utils.dart';
 import '../../../l10n/app_localizations.dart';
@@ -22,11 +21,8 @@ class _AccumulatedSectionState extends ConsumerState<AccumulatedSection> {
   @override
   Widget build(BuildContext context) {
     final forecastAsync = ref.watch(forecastProvider);
-    final settingsAsync = ref.watch(settingsProvider);
-    final symbol = settingsAsync.value?.currencySymbol ?? r'$';
-
-    final DateTime date = DateTime.now();
-    final String month = DateFormat('MMMM').format(date);
+    final settingsAsync = ref.watch(preferencesProvider);
+    final symbol = settingsAsync.value?.currency?? r'$';
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
@@ -35,7 +31,7 @@ class _AccumulatedSectionState extends ConsumerState<AccumulatedSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "${l10n.accumulatedLabel} • $month",
+          l10n.accumulatedLabel,
           style: TextStyle(color: colorScheme.onSurfaceVariant),
         ),
         Row(

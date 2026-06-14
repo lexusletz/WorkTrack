@@ -1,11 +1,11 @@
-import '../settings/settings_model.dart';
+import '../preferences/preferences_model.dart';
 import '../worklog/worklog_model.dart';
 import 'forecast_model.dart';
 
 class ForecastEngine {
   static Forecast compute({
     /// The user settings
-    required Settings settings,
+    required Preferences preferences,
 
     /// The worklogs for the month being browsed
     required List<WorkLog> monthLogs,
@@ -16,7 +16,7 @@ class ForecastEngine {
     /// The month to calculate the forecast for
     required DateTime month,
   }) {
-    final rate = settings.hourlyRate;
+    final rate = preferences.hourlyRate;
     final todayDate = DateTime(today.year, today.month, today.day);
     final monthStart = DateTime(month.year, month.month, 1);
     final monthEnd = DateTime(month.year, month.month + 1, 0);
@@ -33,8 +33,8 @@ class ForecastEngine {
       !d.isAfter(monthEnd);
       d = d.add(const Duration(days: 1))
     ) {
-      final isWorkDay = settings.workingDays.contains(d.weekday);
-      if (isWorkDay) target += settings.standardHoursPerDay * rate;
+      final isWorkDay = preferences.workingDays.contains(d.weekday);
+      if (isWorkDay) target += preferences.dailyTargetHours * rate;
 
       final log = logsByKey[WorkLog.keyFor(d)];
       final isPastOrToday = !d.isAfter(todayDate);
@@ -46,7 +46,7 @@ class ForecastEngine {
           remaining += log.hoursWorked * rate;
           remainingDays++;
         } else if (isWorkDay) {
-          remaining += settings.standardHoursPerDay * rate;
+          remaining += preferences.dailyTargetHours * rate;
           remainingDays++;
         }
       }

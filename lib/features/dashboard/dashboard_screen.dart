@@ -1,84 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/updater/updater_providers.dart';
-import '../../l10n/app_localizations.dart';
-import '../updater/updater_dialog.dart';
-import 'widgets/forecast_header.dart';
-import 'widgets/month_navigator.dart';
-import 'widgets/calendar_grid.dart';
-import 'widgets/day_editor_panel.dart';
 
-class DashboardScreen extends ConsumerStatefulWidget {
+import 'widgets/accumulated_section.dart';
+import 'widgets/amounts_section.dart';
+import 'widgets/calendar_grid.dart';
+import 'widgets/dashboard_header.dart';
+
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
-  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(updaterProvider.notifier).checkForUpdates();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    ref.listen(updaterProvider, (previous, next) async {
-      if (next.hasNewVersion) {
-        await showDialog<void>(
-          context: context,
-          builder: (_) => UpdaterDialog(
-            version: next.newVersion,
-            onUpdateSelected: () {
-              Navigator.of(context).pop();
-              ref.read(updaterProvider.notifier).downloadAndInstallUpdate();
-            },
-          ),
-        );
-      }
-    });
-
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset('assets/icon/icon.png', width: 48, height: 48),
-            const SizedBox(width: 10),
-            Text(l10n.dashboardTitle),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DashboardHeader(),
+              SizedBox(height: 25),
+              AccumulatedSection(),
+              SizedBox(height: 10),
+              AmountsSection(),
+              Expanded(child: CalendarGrid()),
+            ],
+          ),
         ),
-        centerTitle: false,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ForecastHeader(),
-          Divider(
-            thickness: 0.4,
-            color: Theme.of(context).colorScheme.primary.withAlpha(90),
-          ),
-          MonthNavigator(),
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(flex: 2, child: CalendarGrid()),
-                if (MediaQuery.of(context).size.width >= 600)
-                  Container(
-                    constraints: BoxConstraints(minWidth: 330),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: DayEditorPanel(),
-                  ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

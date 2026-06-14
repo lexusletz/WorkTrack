@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/forecast/forecast_providers.dart';
-import '../../../core/settings/settings_providers.dart';
+import '../../../core/preferences/preferences_providers.dart';
 import '../../../core/utils/currency_utils.dart';
 import '../../../l10n/app_localizations.dart';
 import 'custom_divider.dart';
@@ -14,10 +14,10 @@ class AmountsSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final forecastAsync = ref.watch(forecastProvider);
-    final settinsAsync = ref.watch(settingsProvider);
+    final settinsAsync = ref.watch(preferencesProvider);
     final l10n = AppLocalizations.of(context)!;
 
-    final symbol = settinsAsync.value?.currencySymbol ?? r'$';
+    final symbol = settinsAsync.value?.currency ?? r'$';
 
     return forecastAsync.when(
       loading: () => CircularProgressIndicator(),
