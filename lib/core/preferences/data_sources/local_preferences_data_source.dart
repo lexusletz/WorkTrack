@@ -2,7 +2,7 @@ import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../preferences_model.dart';
-import '../preferences_repository_interface.dart';
+import '../preferences_repository.dart';
 
 class LocalPreferencesDataSource implements PreferencesRepository {
   final Logger logger = Logger('LocalPreferencesRepository');

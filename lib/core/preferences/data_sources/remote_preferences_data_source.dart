@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 
 import '../preferences_model.dart';
-import '../preferences_repository_interface.dart';
+import '../preferences_repository.dart';
 
 const _BASE_URL = "http://localhost:8080/preferences";
 
