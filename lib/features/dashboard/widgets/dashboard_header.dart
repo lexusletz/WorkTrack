@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../preferences/preferences_screen.dart';
@@ -9,10 +8,6 @@ class DashboardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateTime date = DateTime.now();
-    final String month = DateFormat('MMMM').format(date);
-    final String day = DateFormat('d').format(date);
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
