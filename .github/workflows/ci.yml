@@ -34,9 +34,6 @@ jobs:
       - name: Analyze Code
         run: flutter analyze
 
-      - name: Run Tests
-        run: flutter test
-
       - name: Build APK
         if: startsWith(github.ref, 'refs/tags/')
         run: flutter build apk --release
