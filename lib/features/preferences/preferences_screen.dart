@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/preferences/preferences_model.dart';
-import '../../core/preferences/preferences_providers.dart';
+import '../../core/preferences/domain/preferences_model.dart';
+import '../../core/preferences/providers/preferences_providers.dart';
 import 'widgets/hourly_rate_section.dart';
 import 'widgets/options_section.dart';
 import 'widgets/preferences_header.dart';

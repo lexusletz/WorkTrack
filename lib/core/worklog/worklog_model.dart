@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
-import '../preferences/preferences_model.dart';
+import '../preferences/domain/preferences_model.dart';
 
 enum DayStatus {
   /// When a day hasn't been registered.

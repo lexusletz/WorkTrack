@@ -1,4 +1,4 @@
-import '../preferences/preferences_model.dart';
+import '../preferences/domain/preferences_model.dart';
 import '../worklog/worklog_model.dart';
 import 'forecast_model.dart';
 

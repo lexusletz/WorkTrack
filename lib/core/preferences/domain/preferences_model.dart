@@ -19,7 +19,7 @@ class Preferences {
     hourlyRate: 8.5,
     dailyTargetHours: 8,
     currency: r'$',
-    workingDays: [],
+    workingDays: [1, 2, 3, 4, 5],
   );
 
   Preferences copyWith({

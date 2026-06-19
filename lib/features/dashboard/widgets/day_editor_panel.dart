@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/preferences/preferences_providers.dart';
+import '../../../core/preferences/providers/preferences_providers.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';

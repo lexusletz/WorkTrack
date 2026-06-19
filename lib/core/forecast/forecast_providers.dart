@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/dashboard/state/dashboard_providers.dart';
-import '../preferences/preferences_providers.dart';
+import '../preferences/providers/preferences_providers.dart';
 import '../worklog/worklog_providers.dart';
 import 'forecast_engine.dart';
 import 'forecast_model.dart';

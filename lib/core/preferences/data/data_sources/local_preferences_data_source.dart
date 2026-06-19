@@ -1,10 +1,9 @@
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../preferences_model.dart';
-import '../preferences_repository.dart';
+import '../../domain/preferences_model.dart';
 
-class LocalPreferencesDataSource implements PreferencesRepository {
+class LocalPreferencesDataSource {
   final Logger logger = Logger('LocalPreferencesRepository');
 
   final SharedPreferences _prefs;
@@ -13,7 +12,6 @@ class LocalPreferencesDataSource implements PreferencesRepository {
 
   LocalPreferencesDataSource(this._prefs);
 
-  @override
   Future<Preferences> load() async {
     final raw = _prefs.getString(_key);
     if (raw == null) return Preferences.defaults;
@@ -21,8 +19,7 @@ class LocalPreferencesDataSource implements PreferencesRepository {
     return Preferences.fromJsonString(raw);
   }
 
-  @override
   Future<void> save(Preferences prefs) async {
-    _prefs.setString(_key, prefs.toJsonString());
+    await _prefs.setString(_key, prefs.toJsonString());
   }
 }
