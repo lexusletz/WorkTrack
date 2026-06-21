@@ -6,6 +6,7 @@ class AppTheme {
   static final ColorScheme _appColorScheme = ColorScheme.dark(
     surface: const Color(0xFF0e1411),
     surfaceContainerHighest: const Color(0xFF1F2C26),
+    surfaceContainerLowest: const Color(0xFF16201b),
     outline: Colors.white.withValues(alpha: 0.06),
 
     onSurface: const Color(0xFF5c6b62),
