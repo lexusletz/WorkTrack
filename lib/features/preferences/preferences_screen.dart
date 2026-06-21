@@ -16,13 +16,14 @@ class PreferencesScreen extends ConsumerStatefulWidget {
 }
 
 class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
-  late Preferences _draft;
+  late Preferences _prevPrefs, _draft;
 
   @override
   void initState() {
     super.initState();
 
-    _draft = ref.read(preferencesProvider).value ?? Preferences.defaults;
+    _prevPrefs = ref.read(preferencesProvider).value ?? Preferences.defaults;
+    _draft = _prevPrefs;
   }
 
   Future<void> _save() async {
@@ -35,7 +36,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.only(top: 14),
+          margin: const EdgeInsets.symmetric(vertical: 14),
           child: Column(
             children: [
               Expanded(
@@ -68,7 +69,10 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                   ),
                 ),
               ),
-              OptionsSection(onSave: _save),
+              OptionsSection(
+                onSave: _save,
+                isActive: _draft != _prevPrefs,
+              ),
             ],
           ),
         ),

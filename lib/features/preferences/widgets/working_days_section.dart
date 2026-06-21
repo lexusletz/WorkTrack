@@ -68,26 +68,27 @@ class WorkingDaysSection extends StatelessWidget {
 
           onChange(localList);
         },
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(
-              color: isSelected ? colorScheme.primary : Colors.transparent,
+        child: AspectRatio(
+          aspectRatio: 1.0,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                color: isSelected ? colorScheme.primary : Colors.transparent,
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              Text(
+            child: Center(
+              child: Text(
                 day,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
