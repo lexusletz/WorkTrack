@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/preferences/domain/preferences_model.dart';
 import '../../core/preferences/providers/preferences_providers.dart';
+import 'widgets/currency_symbol_section.dart';
 import 'widgets/hourly_rate_section.dart';
 import 'widgets/options_section.dart';
 import 'widgets/preferences_header.dart';
@@ -48,6 +49,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                       SizedBox(height: 18),
                       HourlyRateSection(
                         value: _draft.hourlyRate,
+                        symbol: _draft.currency,
                         onChange: (value) {
                           setState(() {
                             _draft = _draft.copyWith(hourlyRate: value);
@@ -63,8 +65,15 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                           });
                         },
                       ),
-                      // SizedBox(height: 18),
-                      // CurrencySymbolSection(),
+                      SizedBox(height: 18),
+                      CurrencySymbolSection(
+                        selectedSymbol: _draft.currency,
+                        onChange: (symbol) {
+                          setState(() {
+                            _draft = _draft.copyWith(currency: symbol);
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -21,7 +21,7 @@ class OptionsSection extends StatelessWidget {
       ),
       padding: EdgeInsets.only(left: 18, right: 18, top: 12),
       child: GestureDetector(
-        onTap: onSave,
+        onTap: isActive ? onSave : () {},
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           height: 48,

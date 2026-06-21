@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 class HourlyRateSection extends StatelessWidget {
   const HourlyRateSection({
     required this.value,
+    required this.symbol,
     required this.onChange,
     super.key,
   });
 
   final double value;
+  final String symbol;
   final Function(double) onChange;
 
   @override
@@ -33,7 +35,7 @@ class HourlyRateSection extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
-                      "\$",
+                      symbol,
                       style: TextStyle(color: Color(0xFF9aa59e), fontSize: 22),
                     ),
                     SizedBox(width: 8),
@@ -62,17 +64,6 @@ class HourlyRateSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // TextNumberAnimation(
-                    //   value: value,
-                    //   duration: const Duration(milliseconds: 850),
-                    //   style: TextStyle(
-                    //     color: Colors.white,
-                    //     fontSize: 42,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    //   decimals: 2,
-                    //   curve: Curves.fastOutSlowIn,
-                    // ),
                     Text(
                       "/H",
                       style: TextStyle(color: Color(0xFF5c6b62), fontSize: 16),
