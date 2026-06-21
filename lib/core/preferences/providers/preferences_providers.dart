@@ -42,10 +42,21 @@ class PreferencesNotifier extends AsyncNotifier<Preferences> {
   }
 
   Future<void> savePreferences(Preferences next) async {
-    state = await AsyncValue.guard(() async {
-      await ref.read(preferencesRepositoryProvider).save(next);
-      return next;
-    });
+    state = AsyncData(next);
+
+    final result = await ref.read(preferencesRepositoryProvider).save(next);
+
+    switch (result) {
+      case Ok():
+        state = AsyncData(next);
+        break;
+
+      case Error():
+        state = AsyncError<Preferences>(result.error, StackTrace.current);
+
+        state = AsyncData(next);
+        break;
+    }
   }
 }
 

@@ -8,7 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/preferences/providers/preferences_providers.dart';
 import 'core/theme/app_theme.dart';
 import 'core/updater/updater_providers.dart';
+import 'core/utils/globals.dart';
 import 'features/dashboard/dashboard_screen.dart';
+import 'features/preferences/widgets/preferences_listener.dart';
 import 'l10n/app_localizations.dart';
 import 'core/worklog/worklog_model.dart';
 import 'core/worklog/worklog_providers.dart';
@@ -70,11 +72,17 @@ class WorkTrackApp extends ConsumerWidget {
     final theme = AppTheme.build(ref);
 
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldMessengerKey,
       title: 'WorkTrack',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: theme,
-      home: const DashboardScreen(),
+      home: DashboardScreen(),
+      builder: (context, child) {
+        return PreferencesListener(
+          child: child ?? SizedBox.shrink(),
+        );
+      },
     );
   }
 }

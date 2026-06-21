@@ -56,12 +56,12 @@ class Preferences {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Preferences &&
-          hourlyRate == other.hourlyRate &&
-          dailyTargetHours == other.dailyTargetHours &&
-          currency == other.currency &&
-          workingDays == other.workingDays;
+    identical(this, other) ||
+    other is Preferences &&
+        hourlyRate == other.hourlyRate &&
+        dailyTargetHours == other.dailyTargetHours &&
+        currency == other.currency && 
+        listEquals(workingDays, other.workingDays);
 
   @override
   int get hashCode =>

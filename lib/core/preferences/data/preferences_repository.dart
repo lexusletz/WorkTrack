@@ -1,5 +1,3 @@
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-
 import '../../utils/exceptions.dart';
 import '../../utils/result.dart';
 import '../domain/preferences_model.dart';
@@ -24,16 +22,14 @@ class PreferencesRepositoryImpl implements PreferencesRepositoryInterface {
   @override
   Future<Result<Preferences>> load() async {
     try {
-      if (!await InternetConnectionChecker.instance.hasConnection) {
-        return Result.ok(await _localDataSource.load());
-      } else {
-        final remotePrefs = await _remoteDataSource.load();
+      final remotePrefs = await _remoteDataSource.load();
+      await _localDataSource.save(remotePrefs);
 
-        await _localDataSource.save(remotePrefs);
-
-        return Result.ok(remotePrefs);
-      }
-    } on NetworkException catch (e) {
+      return Result.ok(remotePrefs);
+    } on NetworkException catch (_) {
+      final localPrefs = await _localDataSource.load();
+      return Result.ok(localPrefs);
+    } on Exception catch (e) {
       return Result.error(e);
     }
   }
@@ -42,7 +38,7 @@ class PreferencesRepositoryImpl implements PreferencesRepositoryInterface {
   //
   // INFO: We could add that locally we save if the preferences were saved on the
   // server correctly, if not, we could retry when the user opens the app again
-  // or when know there is connection.
+  // or when we know there is connection.
   @override
   Future<Result<void>> save(Preferences prefs) async {
     try {
