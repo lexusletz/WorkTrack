@@ -48,7 +48,7 @@ class _HourFieldState extends ConsumerState<HourField> {
               Column(
                 children: [
                   Text(
-                    "HOURS",
+                    "HORAS",
                     style: TextStyle(
                       color: colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.bold,

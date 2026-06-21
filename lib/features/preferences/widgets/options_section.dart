@@ -31,7 +31,7 @@ class OptionsSection extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "SAVE CHANGES",
+              "GUARDAR CAMBIOS",
               style: TextStyle(
                 color: isActive ? colorScheme.surface : colorScheme.onSurface,
                 fontWeight: FontWeight.bold

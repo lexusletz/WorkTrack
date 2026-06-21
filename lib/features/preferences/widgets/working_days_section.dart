@@ -15,13 +15,13 @@ class WorkingDaysSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<int, String> days = {
-      1: 'Mon',
-      2: 'Tue',
-      3: 'Wed',
-      4: 'Thu',
-      5: 'Fri',
-      6: 'Sat',
-      7: 'Sun',
+      1: 'Lun',
+      2: 'Mar',
+      3: 'Mie',
+      4: 'Jue',
+      5: 'Vie',
+      6: 'Sab',
+      7: 'Dom',
     };
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -46,8 +46,8 @@ class WorkingDaysSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("02 • WORKING DAYS", style: TextStyle(color: Color(0xFF9aa59e))),
-        Text("WHICH DAYS YOU WORK", style: TextStyle(color: Color(0xFF5c6b62))),
+        Text("02 • DIAS DE TRABAJO", style: TextStyle(color: Color(0xFF9aa59e))),
+        Text("QUE DIAS TRABAJAS", style: TextStyle(color: Color(0xFF5c6b62))),
       ],
     );
   }

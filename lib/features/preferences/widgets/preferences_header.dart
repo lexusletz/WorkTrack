@@ -13,7 +13,7 @@ class PreferencesHeader extends StatelessWidget {
       child: Row(
         children: [
           Icon(LucideIcons.chevronLeft, color: Color(0xFF9aa59e)),
-          Text("BACK", style: TextStyle(color: Color(0xFF9aa59e))),
+          Text("ATRAS", style: TextStyle(color: Color(0xFF9aa59e))),
         ],
       ),
     );

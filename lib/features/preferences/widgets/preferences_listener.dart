@@ -27,7 +27,7 @@ class PreferencesListener extends ConsumerWidget {
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "Couldn't save preferences in the server.", 
+                      "No se pudieron guardar las preferencias en el servidor.",
                       style: TextStyle(color: Colors.white),
                     )
                   ),

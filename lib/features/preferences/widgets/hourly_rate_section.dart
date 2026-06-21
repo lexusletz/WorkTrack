@@ -91,9 +91,9 @@ class HourlyRateSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("01 • HOURLY RATE", style: TextStyle(color: Color(0xFF9aa59e))),
+        Text("01 • PRECIO POR HORA", style: TextStyle(color: Color(0xFF9aa59e))),
         Text(
-          "AMOUNT EARNED PER HOUR",
+          "CANTIDAD GANADA CADA HORA",
           style: TextStyle(color: Color(0xFF5c6b62)),
         ),
       ],
