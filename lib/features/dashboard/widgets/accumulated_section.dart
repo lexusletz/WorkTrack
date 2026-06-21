@@ -30,10 +30,6 @@ class _AccumulatedSectionState extends ConsumerState<AccumulatedSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          l10n.accumulatedLabel,
-          style: TextStyle(color: colorScheme.onSurfaceVariant),
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,

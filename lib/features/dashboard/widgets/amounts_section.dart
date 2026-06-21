@@ -29,14 +29,16 @@ class AmountsSection extends ConsumerWidget {
           _AmountItem(
             title: l10n.estimatedLabel.toUpperCase(),
             subtitle: l10n.projectionLabel,
-            value: fmt(f.estimate, symbol: symbol),
+            value: f.estimate,
+            symbol: symbol,
             valueColor: colorScheme.primary,
           ),
           CustomDivider(),
           _AmountItem(
             title: l10n.remainingLabel.toUpperCase(),
             subtitle: "${f.remainingDays}${l10n.remainingDaysLabel}",
-            value: fmt(f.remaining, symbol: symbol),
+            value: f.remaining,
+            symbol: symbol,
             valueColor: colorScheme.tertiary,
           ),
           CustomDivider(),
@@ -51,12 +53,14 @@ class _AmountItem extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.value,
+    required this.symbol,
     this.valueColor = Colors.white,
   });
 
   final String title;
   final String subtitle;
-  final String value;
+  final double value;
+  final String symbol;
   final Color valueColor;
 
   @override
@@ -75,9 +79,19 @@ class _AmountItem extends StatelessWidget {
               style: TextStyle(color: colorScheme.onSurfaceVariant),
             ),
             SizedBox(width: 10),
-            Text(
-              value,
-              style: TextStyle(color: valueColor, fontWeight: FontWeight.bold),
+            TweenAnimationBuilder(
+              tween: Tween<double>(
+                begin: 0,
+                end: value,
+              ),
+              duration: const Duration(milliseconds: 900),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, _) {
+                return Text(
+                  fmt(value, symbol: symbol),
+                  style: TextStyle(color: valueColor, fontWeight: FontWeight.bold),
+                );
+              }
             ),
           ],
         ),
