@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/utils/double_utils.dart';
+
 class TextNumberAnimation extends StatefulWidget {
   final num value;
   final TextStyle? style;
@@ -66,7 +68,7 @@ class _TextNumberAnimationState extends State<TextNumberAnimation>
     }
 
     if (value is double) {
-      return value.toStringAsFixed(widget.decimals);
+      return value.toTime;
     }
 
     return value.toInt().toString();
