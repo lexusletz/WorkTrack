@@ -74,10 +74,6 @@ class CalendarGrid extends ConsumerWidget {
                 .toList(),
           ),
         ),
-
-        // TODO: Improve this functionality
-        // Add a `PageView` to change the month horizontally, updating the 
-        // values of the `Forecast`
         Expanded(
           child: GridView.builder(
             padding: const EdgeInsets.only(bottom: 8),
