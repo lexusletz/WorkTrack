@@ -361,6 +361,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start Shift'**
   String get startShiftLabel;
+
+  /// Label for the installation date
+  ///
+  /// In en, this message translates to:
+  /// **'Installation Date: '**
+  String get installationDateLabel;
+
+  /// Label for the expiration date
+  ///
+  /// In en, this message translates to:
+  /// **'Expiration Date: '**
+  String get expirationDateLabel;
+
+  /// Label for the remaining time countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Time: '**
+  String get remainingTimeLabel;
+
+  /// Title for notification 1 day before sideload expiry
+  ///
+  /// In en, this message translates to:
+  /// **'Sideload Expiring Soon'**
+  String get sideloadExpiringSoonTitle;
+
+  /// Body for notification 1 day before sideload expiry
+  ///
+  /// In en, this message translates to:
+  /// **'Your WorkTrack sideload will expire tomorrow. Reinstall via USB from your Mac to continue using the app.'**
+  String get sideloadExpiringSoonBody;
+
+  /// Title for notification when sideload has expired
+  ///
+  /// In en, this message translates to:
+  /// **'Sideload Expired'**
+  String get sideloadExpiredTitle;
+
+  /// Body for notification when sideload has expired
+  ///
+  /// In en, this message translates to:
+  /// **'Your WorkTrack sideload has expired. Reinstall via USB from your Mac to continue using the app.'**
+  String get sideloadExpiredBody;
 }
 
 class _AppLocalizationsDelegate

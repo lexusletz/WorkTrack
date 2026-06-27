@@ -5,6 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'core/notifications/notification_repository.dart';
 import 'core/preferences/providers/preferences_providers.dart';
 import 'core/theme/app_theme.dart';
 import 'core/updater/updater_providers.dart';
@@ -17,6 +19,9 @@ import 'core/worklog/worklog_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  tz.initializeTimeZones();
+  await NotificationRepository.initialize();
 
   final prefs = await SharedPreferences.getInstance();
 

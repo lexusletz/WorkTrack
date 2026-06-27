@@ -140,4 +140,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get startShiftLabel => 'Iniciar Turno';
+
+  @override
+  String get installationDateLabel => 'Fecha de instalación: ';
+
+  @override
+  String get expirationDateLabel => 'Fecha de expiración: ';
+
+  @override
+  String get remainingTimeLabel => 'Tiempo restante: ';
+
+  @override
+  String get sideloadExpiringSoonTitle => 'Sideload por expirar';
+
+  @override
+  String get sideloadExpiringSoonBody =>
+      'Tu sideload de WorkTrack expirará mañana. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.';
+
+  @override
+  String get sideloadExpiredTitle => 'Sideload expirado';
+
+  @override
+  String get sideloadExpiredBody =>
+      'Tu sideload de WorkTrack ha expirado. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.';
 }
