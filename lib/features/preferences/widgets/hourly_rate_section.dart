@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class HourlyRateSection extends StatelessWidget {
   const HourlyRateSection({
     required this.value,
@@ -16,10 +18,11 @@ class HourlyRateSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       children: [
-        _buildHeader(),
+        _buildHeader(l10n),
         SizedBox(height: 10),
         Container(
           decoration: BoxDecoration(
@@ -78,14 +81,18 @@ class HourlyRateSection extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(AppLocalizations l10n) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("01 • PRECIO POR HORA", style: TextStyle(color: Color(0xFF9aa59e))),
-        Text(
-          "CANTIDAD GANADA CADA HORA",
-          style: TextStyle(color: Color(0xFF5c6b62)),
+        Text(l10n.sectionHourlyRateTitle, style: const TextStyle(color: Color(0xFF9aa59e))),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            l10n.sectionHourlyRateSubtitle,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.end,
+            style: const TextStyle(color: Color(0xFF5c6b62)),
+          ),
         ),
       ],
     );

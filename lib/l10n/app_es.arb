@@ -56,6 +56,10 @@
     "@remainingTimeLabel": {
         "description": "Etiqueta para la cuenta regresiva de tiempo restante"
     },
+    "aboutLabel": "Acerca de",
+    "@aboutLabel": {
+        "description": "Etiqueta para la sección acerca de en ajustes"
+    },
     "sideloadExpiringSoonTitle": "Sideload por expirar",
     "@sideloadExpiringSoonTitle": {
         "description": "Título para la notificación 1 día antes de que expire el sideload"
@@ -71,6 +75,38 @@
     "sideloadExpiredBody": "Tu sideload de WorkTrack ha expirado. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.",
     "@sideloadExpiredBody": {
         "description": "Cuerpo para la notificación cuando el sideload ha expirado"
+    },
+    "sectionHourlyRateTitle": "01 • PRECIO POR HORA",
+    "@sectionHourlyRateTitle": {
+        "description": "Título de la sección de precio por hora en ajustes"
+    },
+    "sectionHourlyRateSubtitle": "CANTIDAD GANADA CADA HORA",
+    "@sectionHourlyRateSubtitle": {
+        "description": "Subtítulo de la sección de precio por hora"
+    },
+    "sectionWorkingDaysTitle": "02 • DIAS DE TRABAJO",
+    "@sectionWorkingDaysTitle": {
+        "description": "Título de la sección de días de trabajo en ajustes"
+    },
+    "sectionWorkingDaysSubtitle": "QUE DIAS TRABAJAS",
+    "@sectionWorkingDaysSubtitle": {
+        "description": "Subtítulo de la sección de días de trabajo"
+    },
+    "sectionCurrencySymbolTitle": "03 • TIPO DE MONEDA",
+    "@sectionCurrencySymbolTitle": {
+        "description": "Título de la sección de tipo de moneda en ajustes"
+    },
+    "sectionCurrencySymbolSubtitle": "USADA EN TODA LA APLICACION",
+    "@sectionCurrencySymbolSubtitle": {
+        "description": "Subtítulo de la sección de tipo de moneda"
+    },
+    "settingsBackLabel": "ATRAS",
+    "@settingsBackLabel": {
+        "description": "Botón de retroceso en el encabezado de preferencias"
+    },
+    "settingsSaveLabel": "GUARDAR CAMBIOS",
+    "@settingsSaveLabel": {
+        "description": "Botón de guardar en la pantalla de preferencias"
     }
 }
 

@@ -151,6 +151,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get remainingTimeLabel => 'Tiempo restante: ';
 
   @override
+  String get aboutLabel => 'Acerca de';
+
+  @override
   String get sideloadExpiringSoonTitle => 'Sideload por expirar';
 
   @override
@@ -163,4 +166,28 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get sideloadExpiredBody =>
       'Tu sideload de WorkTrack ha expirado. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.';
+
+  @override
+  String get sectionHourlyRateTitle => '01 • PRECIO POR HORA';
+
+  @override
+  String get sectionHourlyRateSubtitle => 'CANTIDAD GANADA CADA HORA';
+
+  @override
+  String get sectionWorkingDaysTitle => '02 • DIAS DE TRABAJO';
+
+  @override
+  String get sectionWorkingDaysSubtitle => 'QUE DIAS TRABAJAS';
+
+  @override
+  String get sectionCurrencySymbolTitle => '03 • TIPO DE MONEDA';
+
+  @override
+  String get sectionCurrencySymbolSubtitle => 'USADA EN TODA LA APLICACION';
+
+  @override
+  String get settingsBackLabel => 'ATRAS';
+
+  @override
+  String get settingsSaveLabel => 'GUARDAR CAMBIOS';
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class OptionsSection extends StatelessWidget {
   const OptionsSection({
     super.key,
@@ -13,6 +15,7 @@ class OptionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -31,7 +34,7 @@ class OptionsSection extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "GUARDAR CAMBIOS",
+              l10n.settingsSaveLabel,
               style: TextStyle(
                 color: isActive ? colorScheme.surface : colorScheme.onSurface,
                 fontWeight: FontWeight.bold
