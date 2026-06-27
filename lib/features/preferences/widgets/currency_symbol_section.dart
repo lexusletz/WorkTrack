@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class CurrencySymbolSection extends StatelessWidget {
   const CurrencySymbolSection({
     super.key,
@@ -20,10 +22,11 @@ class CurrencySymbolSection extends StatelessWidget {
     };
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       children: [
-        _buildHeader(),
+        _buildHeader(l10n),
         SizedBox(height: 10),
         Row(
           spacing: 10,
@@ -40,15 +43,19 @@ class CurrencySymbolSection extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(AppLocalizations l10n) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "03 • TIPO DE MONEDA",
-          style: TextStyle(color: Color(0xFF9aa59e)),
+        Text(l10n.sectionCurrencySymbolTitle, style: const TextStyle(color: Color(0xFF9aa59e))),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            l10n.sectionCurrencySymbolSubtitle,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.end,
+            style: const TextStyle(color: Color(0xFF5c6b62)),
+          ),
         ),
-        Text("USADA EN TODA LA APLICACION", style: TextStyle(color: Color(0xFF5c6b62))),
       ],
     );
   }
@@ -58,42 +65,41 @@ class CurrencySymbolSection extends StatelessWidget {
 
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          onChange(symbol);
-        },
-        child: AspectRatio(
-          aspectRatio: 2.5,
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadiusDirectional.circular(6),
-              border: Border.all(
-                color: isSelected ? colorScheme.primary : Colors.transparent,
-              )
+        onTap: () => onChange(symbol),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          height: 72,
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadiusDirectional.circular(6),
+            border: Border.all(
+              color: isSelected ? colorScheme.primary : Colors.transparent,
             ),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    symbol,
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  symbol,
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: colorScheme.onSurface,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
                     name,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 14,
                       color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

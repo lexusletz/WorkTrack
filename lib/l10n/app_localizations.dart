@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Remaining Time: '**
   String get remainingTimeLabel;
 
+  /// Label for the about section in settings
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutLabel;
+
   /// Title for notification 1 day before sideload expiry
   ///
   /// In en, this message translates to:
@@ -403,6 +409,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your WorkTrack sideload has expired. Reinstall via USB from your Mac to continue using the app.'**
   String get sideloadExpiredBody;
+
+  /// Title for the hourly rate section in settings
+  ///
+  /// In en, this message translates to:
+  /// **'01 • HOURLY RATE'**
+  String get sectionHourlyRateTitle;
+
+  /// Subtitle prompt for the hourly rate section
+  ///
+  /// In en, this message translates to:
+  /// **'SET YOUR RATE'**
+  String get sectionHourlyRateSubtitle;
+
+  /// Title for the working days section in settings
+  ///
+  /// In en, this message translates to:
+  /// **'02 • WORKING DAYS'**
+  String get sectionWorkingDaysTitle;
+
+  /// Subtitle prompt for the working days section
+  ///
+  /// In en, this message translates to:
+  /// **'CHOOSE WORK DAYS'**
+  String get sectionWorkingDaysSubtitle;
+
+  /// Title for the currency symbol section in settings
+  ///
+  /// In en, this message translates to:
+  /// **'03 • CURRENCY TYPE'**
+  String get sectionCurrencySymbolTitle;
+
+  /// Subtitle prompt for the currency symbol section
+  ///
+  /// In en, this message translates to:
+  /// **'SELECT CURRENCY'**
+  String get sectionCurrencySymbolSubtitle;
+
+  /// Back button in the preferences header
+  ///
+  /// In en, this message translates to:
+  /// **'BACK'**
+  String get settingsBackLabel;
+
+  /// Save button in the preferences screen
+  ///
+  /// In en, this message translates to:
+  /// **'SAVE CHANGES'**
+  String get settingsSaveLabel;
 }
 
 class _AppLocalizationsDelegate

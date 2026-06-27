@@ -151,6 +151,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get remainingTimeLabel => 'Remaining Time: ';
 
   @override
+  String get aboutLabel => 'About';
+
+  @override
   String get sideloadExpiringSoonTitle => 'Sideload Expiring Soon';
 
   @override
@@ -163,4 +166,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sideloadExpiredBody =>
       'Your WorkTrack sideload has expired. Reinstall via USB from your Mac to continue using the app.';
+
+  @override
+  String get sectionHourlyRateTitle => '01 • HOURLY RATE';
+
+  @override
+  String get sectionHourlyRateSubtitle => 'SET YOUR RATE';
+
+  @override
+  String get sectionWorkingDaysTitle => '02 • WORKING DAYS';
+
+  @override
+  String get sectionWorkingDaysSubtitle => 'CHOOSE WORK DAYS';
+
+  @override
+  String get sectionCurrencySymbolTitle => '03 • CURRENCY TYPE';
+
+  @override
+  String get sectionCurrencySymbolSubtitle => 'SELECT CURRENCY';
+
+  @override
+  String get settingsBackLabel => 'BACK';
+
+  @override
+  String get settingsSaveLabel => 'SAVE CHANGES';
 }

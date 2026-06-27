@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class WorkingDaysSection extends StatelessWidget {
   const WorkingDaysSection({
     super.key,
@@ -25,10 +27,11 @@ class WorkingDaysSection extends StatelessWidget {
     };
 
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       children: [
-        _buildHeader(),
+        _buildHeader(l10n),
         SizedBox(height: 10),
         Row(
           spacing: 10,
@@ -42,12 +45,19 @@ class WorkingDaysSection extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(AppLocalizations l10n) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("02 • DIAS DE TRABAJO", style: TextStyle(color: Color(0xFF9aa59e))),
-        Text("QUE DIAS TRABAJAS", style: TextStyle(color: Color(0xFF5c6b62))),
+        Text(l10n.sectionWorkingDaysTitle, style: const TextStyle(color: Color(0xFF9aa59e))),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            l10n.sectionWorkingDaysSubtitle,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.end,
+            style: const TextStyle(color: Color(0xFF5c6b62)),
+          ),
+        ),
       ],
     );
   }

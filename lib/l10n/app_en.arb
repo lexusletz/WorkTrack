@@ -185,6 +185,10 @@
     "@remainingTimeLabel": {
         "description": "Label for the remaining time countdown"
     },
+    "aboutLabel": "About",
+    "@aboutLabel": {
+        "description": "Label for the about section in settings"
+    },
     "sideloadExpiringSoonTitle": "Sideload Expiring Soon",
     "@sideloadExpiringSoonTitle": {
         "description": "Title for notification 1 day before sideload expiry"
@@ -200,5 +204,37 @@
     "sideloadExpiredBody": "Your WorkTrack sideload has expired. Reinstall via USB from your Mac to continue using the app.",
     "@sideloadExpiredBody": {
         "description": "Body for notification when sideload has expired"
+    },
+    "sectionHourlyRateTitle": "01 • HOURLY RATE",
+    "@sectionHourlyRateTitle": {
+        "description": "Title for the hourly rate section in settings"
+    },
+    "sectionHourlyRateSubtitle": "SET YOUR RATE",
+    "@sectionHourlyRateSubtitle": {
+        "description": "Subtitle prompt for the hourly rate section"
+    },
+    "sectionWorkingDaysTitle": "02 • WORKING DAYS",
+    "@sectionWorkingDaysTitle": {
+        "description": "Title for the working days section in settings"
+    },
+    "sectionWorkingDaysSubtitle": "CHOOSE WORK DAYS",
+    "@sectionWorkingDaysSubtitle": {
+        "description": "Subtitle prompt for the working days section"
+    },
+    "sectionCurrencySymbolTitle": "03 • CURRENCY TYPE",
+    "@sectionCurrencySymbolTitle": {
+        "description": "Title for the currency symbol section in settings"
+    },
+    "sectionCurrencySymbolSubtitle": "SELECT CURRENCY",
+    "@sectionCurrencySymbolSubtitle": {
+        "description": "Subtitle prompt for the currency symbol section"
+    },
+    "settingsBackLabel": "BACK",
+    "@settingsBackLabel": {
+        "description": "Back button in the preferences header"
+    },
+    "settingsSaveLabel": "SAVE CHANGES",
+    "@settingsSaveLabel": {
+        "description": "Save button in the preferences screen"
     }
 }

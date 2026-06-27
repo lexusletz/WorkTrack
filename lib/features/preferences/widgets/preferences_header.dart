@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class PreferencesHeader extends StatelessWidget {
   const PreferencesHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
@@ -13,7 +16,7 @@ class PreferencesHeader extends StatelessWidget {
       child: Row(
         children: [
           Icon(LucideIcons.chevronLeft, color: Color(0xFF9aa59e)),
-          Text("ATRAS", style: TextStyle(color: Color(0xFF9aa59e))),
+          Text(l10n.settingsBackLabel, style: TextStyle(color: Color(0xFF9aa59e))),
         ],
       ),
     );
