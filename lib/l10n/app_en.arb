@@ -172,5 +172,33 @@
     "startShiftLabel": "Start Shift",
     "@startShiftLabel": {
         "description": "Label for the start shift button"
+    },
+    "installationDateLabel": "Installation Date: ",
+    "@installationDateLabel": {
+        "description": "Label for the installation date"
+    },
+    "expirationDateLabel": "Expiration Date: ",
+    "@expirationDateLabel": {
+        "description": "Label for the expiration date"
+    },
+    "remainingTimeLabel": "Remaining Time: ",
+    "@remainingTimeLabel": {
+        "description": "Label for the remaining time countdown"
+    },
+    "sideloadExpiringSoonTitle": "Sideload Expiring Soon",
+    "@sideloadExpiringSoonTitle": {
+        "description": "Title for notification 1 day before sideload expiry"
+    },
+    "sideloadExpiringSoonBody": "Your WorkTrack sideload will expire tomorrow. Reinstall via USB from your Mac to continue using the app.",
+    "@sideloadExpiringSoonBody": {
+        "description": "Body for notification 1 day before sideload expiry"
+    },
+    "sideloadExpiredTitle": "Sideload Expired",
+    "@sideloadExpiredTitle": {
+        "description": "Title for notification when sideload has expired"
+    },
+    "sideloadExpiredBody": "Your WorkTrack sideload has expired. Reinstall via USB from your Mac to continue using the app.",
+    "@sideloadExpiredBody": {
+        "description": "Body for notification when sideload has expired"
     }
 }

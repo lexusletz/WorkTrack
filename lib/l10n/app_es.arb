@@ -43,6 +43,34 @@
     "dailyLogLabel": "D-LOG",
     "rateLabel": "Tarifa",
     "perHourAbbreviation": "/h",
-    "startShiftLabel": "Iniciar Turno"
+    "startShiftLabel": "Iniciar Turno",
+    "installationDateLabel": "Fecha de instalación: ",
+    "@installationDateLabel": {
+        "description": "Etiqueta para la fecha de instalación"
+    },
+    "expirationDateLabel": "Fecha de expiración: ",
+    "@expirationDateLabel": {
+        "description": "Etiqueta para la fecha de expiración"
+    },
+    "remainingTimeLabel": "Tiempo restante: ",
+    "@remainingTimeLabel": {
+        "description": "Etiqueta para la cuenta regresiva de tiempo restante"
+    },
+    "sideloadExpiringSoonTitle": "Sideload por expirar",
+    "@sideloadExpiringSoonTitle": {
+        "description": "Título para la notificación 1 día antes de que expire el sideload"
+    },
+    "sideloadExpiringSoonBody": "Tu sideload de WorkTrack expirará mañana. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.",
+    "@sideloadExpiringSoonBody": {
+        "description": "Cuerpo para la notificación 1 día antes de que expire el sideload"
+    },
+    "sideloadExpiredTitle": "Sideload expirado",
+    "@sideloadExpiredTitle": {
+        "description": "Título para la notificación cuando el sideload ha expirado"
+    },
+    "sideloadExpiredBody": "Tu sideload de WorkTrack ha expirado. Vuelve a instalar mediante USB desde tu Mac para seguir usando la app.",
+    "@sideloadExpiredBody": {
+        "description": "Cuerpo para la notificación cuando el sideload ha expirado"
+    }
 }
 
