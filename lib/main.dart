@@ -5,7 +5,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'core/notifications/installation_providers.dart';
 import 'core/notifications/notification_repository.dart';
 import 'core/preferences/providers/preferences_providers.dart';
@@ -21,16 +20,24 @@ import 'core/worklog/worklog_providers.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  tz.initializeTimeZones();
-  await NotificationRepository.initialize();
+  final results = await Future.wait([
+    // FIXME: Move this to when the user really needs to enable notifications,
+    //       or when we ask for it
+    //
+    NotificationRepository.initialize(),
+    SharedPreferences.getInstance(),
+    _initHive(),
+    PackageInfo.fromPlatform(),
+  ]);
 
-  final prefs = await SharedPreferences.getInstance();
+  // FIXME: We could do the same as in line 8-9. We only use this when programing
+  //        notification, so, why load it on the first start?
+  //
+  // tz.initializeTimeZones();
 
-  await Hive.initFlutter();
-  Hive.registerAdapter(WorkLogAdapter());
-  final worklogBox = await Hive.openBox<WorkLog>('worklogs');
-
-  final packageInfo = await PackageInfo.fromPlatform();
+  final prefs = results[1] as SharedPreferences;
+  final worklogBox = results[2] as Box<WorkLog>;
+  final packageInfo = results[3] as PackageInfo;
 
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
@@ -52,12 +59,6 @@ void main() async {
     ]);
   }
 
-  // Hide system UI (navigation bar)
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: [SystemUiOverlay.top],
-  );
-
   runApp(
     ProviderScope(
       overrides: [
@@ -68,6 +69,12 @@ void main() async {
       child: const WorkTrackApp(),
     ),
   );
+}
+
+Future<Box<WorkLog>> _initHive() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(WorkLogAdapter());
+  return Hive.openBox<WorkLog>('worklogs');
 }
 
 class _SideloadInitializer extends ConsumerStatefulWidget {
