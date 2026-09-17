@@ -5,7 +5,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'core/notifications/installation_providers.dart';
 import 'core/notifications/notification_repository.dart';
 import 'core/preferences/providers/preferences_providers.dart';
 import 'core/theme/app_theme.dart';
@@ -45,7 +44,8 @@ void main() async {
   });
 
   final view = WidgetsBinding.instance.platformDispatcher.views.first;
-  final logicalShortestSide = view.physicalSize.shortestSide / view.devicePixelRatio;
+  final logicalShortestSide =
+      view.physicalSize.shortestSide / view.devicePixelRatio;
 
   if (logicalShortestSide < 600) {
     SystemChrome.setPreferredOrientations([
@@ -77,33 +77,6 @@ Future<Box<WorkLog>> _initHive() async {
   return Hive.openBox<WorkLog>('worklogs');
 }
 
-class _SideloadInitializer extends ConsumerStatefulWidget {
-  final Widget child;
-  const _SideloadInitializer({required this.child});
-
-  @override
-  ConsumerState<_SideloadInitializer> createState() =>
-      _SideloadInitializerState();
-}
-
-class _SideloadInitializerState extends ConsumerState<_SideloadInitializer> {
-  @override
-  Widget build(BuildContext context) {
-    ref.listen(installationTimestampProvider, (previous, next) {
-      if (next.hasValue && next.value != null) {
-        final expirationDate = next.value!.add(const Duration(days: 7));
-        final l10n = AppLocalizations.of(context)!;
-        NotificationRepository.scheduleReinstallReminder(
-          expirationDate: expirationDate,
-          l10n: l10n,
-        );
-      }
-    });
-
-    return widget.child;
-  }
-}
-
 class WorkTrackApp extends ConsumerWidget {
   const WorkTrackApp({super.key});
 
@@ -119,11 +92,7 @@ class WorkTrackApp extends ConsumerWidget {
       theme: theme,
       home: DashboardScreen(),
       builder: (context, child) {
-        return _SideloadInitializer(
-          child: PreferencesListener(
-            child: child ?? SizedBox.shrink(),
-          ),
-        );
+        return PreferencesListener(child: child ?? SizedBox.shrink());
       },
     );
   }
