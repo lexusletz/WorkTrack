@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/preferences/domain/preferences_model.dart';
 import '../../core/preferences/providers/preferences_providers.dart';
+import '../../core/ui/scaffold/dismiss_keyboard_on_interaction.dart';
 import 'widgets/app_footer.dart';
 import 'widgets/currency_symbol_section.dart';
 import 'widgets/hourly_rate_section.dart';
-import 'widgets/installation_info_section.dart';
 import 'widgets/options_section.dart';
 import 'widgets/preferences_header.dart';
 import 'widgets/working_days_section.dart';
@@ -54,70 +54,74 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 14),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: Opacity(
-                  opacity: _headerOpacity,
-                  child: Column(
-                    children: [
-                      PreferencesHeader(),
-                      SizedBox(height: 18),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
+        child: DismissKeyboardOnInteraction(
+          child: Container(
+            margin: const EdgeInsets.only(top: 14),
+            child: Column(
+              children: [
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
+                  child: Opacity(
+                    opacity: _headerOpacity,
                     child: Column(
-                      children: [
-                        HourlyRateSection(
-                          value: _draft.hourlyRate,
-                          symbol: _draft.currency,
-                          onChange: (value) {
-                            setState(() {
-                              _draft = _draft.copyWith(hourlyRate: value);
-                            });
-                          },
-                        ),
-                        SizedBox(height: 18),
-                        WorkingDaysSection(
-                          selectedWorkingDays: _draft.workingDays,
-                          onChange: (workingDays) {
-                            setState(() {
-                              _draft = _draft.copyWith(
-                                workingDays: workingDays,
-                              );
-                            });
-                          },
-                        ),
-                        SizedBox(height: 18),
-                        CurrencySymbolSection(
-                          selectedSymbol: _draft.currency,
-                          onChange: (symbol) {
-                            setState(() {
-                              _draft = _draft.copyWith(currency: symbol);
-                            });
-                          },
-                        ),
-                        SizedBox(height: 18),
-                        InstallationInfoSection(),
-                        SizedBox(height: 10),
-                        AppFooter(),
-                      ],
+                      children: [PreferencesHeader(), SizedBox(height: 18)],
                     ),
                   ),
                 ),
-              ),
-              OptionsSection(onSave: _save, isActive: _draft != _prevPrefs),
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      child: Column(
+                        children: [
+                          HourlyRateSection(
+                            value: _draft.hourlyRate,
+                            symbol: _draft.currency,
+                            onChange: (value) {
+                              setState(() {
+                                _draft = _draft.copyWith(hourlyRate: value);
+                              });
+                            },
+                          ),
+                          SizedBox(height: 18),
+                          WorkingDaysSection(
+                            selectedWorkingDays: _draft.workingDays,
+                            onChange: (workingDays) {
+                              setState(() {
+                                _draft = _draft.copyWith(
+                                  workingDays: workingDays,
+                                );
+                              });
+                            },
+                          ),
+                          SizedBox(height: 18),
+                          CurrencySymbolSection(
+                            selectedSymbol: _draft.currency,
+                            onChange: (symbol) {
+                              setState(() {
+                                _draft = _draft.copyWith(currency: symbol);
+                              });
+                            },
+                          ),
+                          SizedBox(height: 18),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                OptionsSection(onSave: _save, isActive: _draft != _prevPrefs),
+                AppFooter(),
+                // We use 20 so it gives time for the keyboard to remove the
+                // bottom padding so it doesn't "jumps" when the keyboard is dismissed.
+                // It just gives a better UX.
+                if (MediaQuery.of(context).viewInsets.bottom >= 20)
+                  SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),

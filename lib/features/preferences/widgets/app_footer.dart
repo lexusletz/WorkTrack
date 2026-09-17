@@ -13,22 +13,16 @@ class AppFooter extends ConsumerWidget {
 
     return Column(
       children: [
-        Container(
-          height: 1,
-          color: Colors.white.withValues(alpha: 0.1),
-          margin: const EdgeInsets.symmetric(horizontal: 18),
-        ),
         const SizedBox(height: 14),
         Text(
-          "MADE WITH ♥ BY JORDY PINOS",
+          "HECHO CON ♥ POR JORDY PINOS",
           style: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 12),
         ),
         const SizedBox(height: 2),
         Text(
-          "VERSION V${packageInfo.version}",
+          "VERSIÓN V${packageInfo.version}",
           style: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 11),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }
