@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import 'preference_section.dart';
 
 class WorkingDaysSection extends StatelessWidget {
   const WorkingDaysSection({
@@ -16,49 +17,30 @@ class WorkingDaysSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<int, String> days = {
-      1: 'Lun',
-      2: 'Mar',
-      3: 'Mie',
-      4: 'Jue',
-      5: 'Vie',
-      6: 'Sab',
-      7: 'Dom',
-    };
-
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    return Column(
-      children: [
-        _buildHeader(l10n),
-        SizedBox(height: 10),
-        Row(
-          spacing: 10,
-          children: days.entries
-              .map<Widget>(
-                (day) => _buildButton(day.value, day.key, colorScheme),
-              )
-              .toList(),
-        ),
-      ],
-    );
-  }
+    final Map<int, String> days = {
+      1: l10n.monShort,
+      2: l10n.tueShort,
+      3: l10n.wedShort,
+      4: l10n.thuShort,
+      5: l10n.friShort,
+      6: l10n.satShort,
+      7: l10n.sunShort,
+    };
 
-  Widget _buildHeader(AppLocalizations l10n) {
-    return Row(
-      children: [
-        Text(l10n.sectionWorkingDaysTitle, style: const TextStyle(color: Color(0xFF9aa59e))),
-        const SizedBox(width: 12),
-        Flexible(
-          child: Text(
-            l10n.sectionWorkingDaysSubtitle,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.end,
-            style: const TextStyle(color: Color(0xFF5c6b62)),
-          ),
-        ),
-      ],
+    return PreferenceSection(
+      title: l10n.sectionWorkingDaysTitle,
+      subtitle: l10n.sectionWorkingDaysSubtitle,
+      child: Row(
+        spacing: 10,
+        children: days.entries
+            .map<Widget>(
+              (day) => _buildButton(day.value, day.key, colorScheme),
+            )
+            .toList(),
+      ),
     );
   }
 

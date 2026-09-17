@@ -107,7 +107,6 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                             },
                           ),
                           SizedBox(height: 18),
-                          SizedBox(height: 10),
                         ],
                       ),
                     ),
