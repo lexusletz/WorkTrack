@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../core/constants/regex_constants.dart';
 import '../../../l10n/app_localizations.dart';
 import 'preference_section.dart';
 
@@ -14,7 +15,7 @@ class HourlyRateSection extends StatefulWidget {
 
   final double value;
   final String symbol;
-  final Function(double) onChange;
+  final ValueChanged<double> onChange;
 
   @override
   State<HourlyRateSection> createState() => _HourlyRateSectionState();
@@ -59,16 +60,32 @@ class _HourlyRateSectionState extends State<HourlyRateSection> {
                     child: TextField(
                       controller: textController,
                       onChanged: (String newValue) {
+                        if (newValue.isEmpty) {
+                          // FIXME: Here we should add a new state for when
+                          //  the field it's empty it doesn't let the user update
+                          //  the hourly rate and shows a message under the
+                          //  text field with information.
+                          return;
+                        }
+
+                        String normalized = newValue;
+
+                        // Check that all the ',' could be parsed into a double
+                        if (newValue.contains(',')) {
+                          normalized = newValue.replaceAll(',', '.');
+                        }
+
                         // We're sure that the String can be converted into a Double
-                        widget.onChange(double.parse(newValue.isEmpty ? '0' : newValue));
+                        final v = double.tryParse(normalized);
+                        if (v != null) widget.onChange(v);
                       },
                       keyboardType: TextInputType.numberWithOptions(
-                        signed: true,
+                        signed: false,
                         decimal: true,
                       ),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d*\.?\d{0,2}'),
+                          RegexConstants.decimalNumber
                         ),
                       ],
                       decoration: InputDecoration(
