@@ -4,25 +4,25 @@ import 'package:hive/hive.dart';
 import '../preferences/domain/preferences_model.dart';
 
 enum DayStatus {
-  /// When a day hasn't been registered.
+  /// Workday whether scheduled or worked
   WORKDAY,
 
   /// No work day, holiday or absent
-  NONWORKDAY
+  NONWORKDAY,
 }
 
 DayStatus dayStatusFor(DateTime day, WorkLog? log, Preferences preferences) {
-    return preferences.workingDays.contains(day.weekday)
-        ? DayStatus.WORKDAY
-        : DayStatus.NONWORKDAY;
+  final worked = (log?.hoursWorked ?? 0) > 0;
+  if (worked) return DayStatus.WORKDAY;
+
+  return preferences.workingDays.contains(day.weekday)
+      ? DayStatus.WORKDAY
+      : DayStatus.NONWORKDAY;
 }
 
 @immutable
 class WorkLog {
-  const WorkLog({
-    required this.date,
-    required this.hoursWorked,
-  });
+  const WorkLog({required this.date, required this.hoursWorked});
 
   final DateTime date;
   final double hoursWorked;
@@ -34,10 +34,7 @@ class WorkLog {
 
   String get key => keyFor(date);
 
-  WorkLog copyWith({
-    DateTime? date,
-    double? hoursWorked,
-  }) {
+  WorkLog copyWith({DateTime? date, double? hoursWorked}) {
     return WorkLog(
       date: date ?? this.date,
       hoursWorked: hoursWorked ?? this.hoursWorked,
