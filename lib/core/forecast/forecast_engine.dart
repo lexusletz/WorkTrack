@@ -29,7 +29,7 @@ class ForecastEngine {
     double target = 0;
 
     for (
-      var d = monthStart;
+      DateTime d = monthStart;
       !d.isAfter(monthEnd);
       d = d.add(const Duration(days: 1))
     ) {
@@ -43,8 +43,10 @@ class ForecastEngine {
         accumulated += (log?.hoursWorked ?? 0) * rate;
       } else {
         if (log != null) {
-          remaining += log.hoursWorked * rate;
-          remainingDays++;
+          if (log.hoursWorked > 0) {
+            remaining += log.hoursWorked * rate;
+            remainingDays++;
+          }
         } else if (isWorkDay) {
           remaining += preferences.dailyTargetHours * rate;
           remainingDays++;
