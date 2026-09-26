@@ -302,13 +302,13 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settingsTooltip;
 
-  /// No description provided for @devicesPlatformNotSupported.
+  /// Snackbar message
   ///
   /// In en, this message translates to:
   /// **'Synchronization not available on this platform'**
   String get devicesPlatformNotSupported;
 
-  /// No description provided for @updateDialogTitle.
+  /// Title of the update dialog
   ///
   /// In en, this message translates to:
   /// **'Update Available - '**

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/preferences/providers/preferences_providers.dart';
+import '../../../core/ui/custom_snackbar.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/worklog/worklog_model.dart';
 import '../../../core/worklog/worklog_providers.dart';
@@ -25,11 +26,19 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
 
   Future<void> _save(DateTime day) async {
     final repo = ref.read(worklogRepositoryProvider);
-    if (_hours == 0) {
-      await repo.delete(day);
-    } else {
-      await repo.put(WorkLog(date: day, hoursWorked: _hours));
+
+    try {
+      if (_hours == 0) {
+        await repo.delete(day);
+      } else {
+        await repo.put(WorkLog(date: day, hoursWorked: _hours));
+      }
+    } catch (e) {
+      if (!mounted) return;
+      CustomSnackbar(text: "Error saving work log").showSnackbar(context);
+      return;
     }
+
     if (!mounted) return;
     Navigator.of(context).pop();
   }
@@ -123,9 +132,7 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
             children: [
               Text(
                 "EQUIVALE A",
-                style: TextStyle(
-                  color: const Color(0xFF9aa59e),
-                ),
+                style: TextStyle(color: const Color(0xFF9aa59e)),
               ),
               TextNumberAnimation(
                 duration: Duration(milliseconds: 800),
@@ -133,17 +140,17 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
                 currencySymbol: symbol,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: colorScheme.primary
+                  color: colorScheme.primary,
                 ),
                 decimals: 2,
                 curve: Curves.easeOutCubic,
-              )
+              ),
             ],
           ),
           SizedBox(height: 15),
           GestureDetector(
-            onTap: () {
-              _save(selectedDay);
+            onTap: () async {
+              await _save(selectedDay);
             },
             child: Container(
               height: 48,
@@ -159,8 +166,7 @@ class _DayEditorPanelState extends ConsumerState<DayEditorPanel> {
               ),
             ),
           ),
-          if (Platform.isIOS)
-            SizedBox(height: 20),
+          if (Platform.isIOS) SizedBox(height: 20),
         ],
       ),
     );
