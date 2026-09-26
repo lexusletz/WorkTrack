@@ -4,6 +4,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/preferences/domain/preferences_model.dart';
 import '../../../core/preferences/providers/preferences_providers.dart';
+import '../../../core/ui/custom_snackbar.dart';
 import '../../../core/utils/globals.dart';
 
 class PreferencesListener extends ConsumerWidget {
@@ -14,32 +15,18 @@ class PreferencesListener extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final CustomSnackbar snackbar = CustomSnackbar(
+      text: "No se pudieron guardar las preferencias en el servidor",
+      icon: LucideIcons.cloudOff,
+    );
 
     ref.listen<AsyncValue<Preferences>>(preferencesProvider, ((previous, next) {
       if (next is AsyncError && !next.isLoading) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           scaffoldMessengerKey.currentState?.removeCurrentSnackBar();
           scaffoldMessengerKey.currentState?.showSnackBar(
-            SnackBar(
-              content: const Row(
-                children: [
-                  Icon(LucideIcons.cloudOff, color: Colors.white),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "No se pudieron guardar las preferencias en el servidor.",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ),
-                ],
-              ),
-              backgroundColor: colorScheme.primaryContainer,
-              duration: const Duration(seconds: 4),
-            ),
-            snackBarAnimationStyle: AnimationStyle(
-              duration: Duration(milliseconds: 400),
-              curve: Curves.fastOutSlowIn,
-            )
+            snackbar.build(colorScheme),
+            snackBarAnimationStyle: snackbar.animationStyle,
           );
         });
       }

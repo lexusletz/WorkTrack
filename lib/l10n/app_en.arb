@@ -138,9 +138,12 @@
     },
     "devicesPlatformNotSupported": "Synchronization not available on this platform",
     "@devicesPlatformNotSupported": {
-        "descriptions": "Snackbar message"
+        "description": "Snackbar message"
     },
     "updateDialogTitle": "Update Available - ",
+    "@updateDialogTitle": {
+        "description": "Title of the update dialog"
+    },
     "goalLabel": "GOAL",
     "@goalLabel": {
         "description": "Label for the goal amount"
